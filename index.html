@@ -3,37 +3,39 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bi One Al | متجرك التقني</title>
+<title>Bi One Al | سوقك في جيبك</title>
 
 <style>
-/* تصفير الإعدادات */
-*{box-sizing:border-box; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin:0; padding:0}
-
+/* 🎨 الإعدادات العامة والألوان (مستوحاة من التصميم 1) */
 :root {
-    --bg-dark: #020617; /* لون الخلفية العميق من التصميم 1 */
-    --accent-blue: #38bdf8; /* اللون الأزرق المضيء */
+    --bg-dark: #020617; 
+    --accent-blue: #38bdf8; 
     --card-bg: rgba(15, 23, 42, 0.8);
+    --glow: 0 0 20px rgba(56, 189, 248, 0.5);
 }
+
+*{box-sizing:border-box; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin:0; padding:0}
 
 body {
   color: white;
   min-height: 100vh;
-  /* 🎨 تطبيق خلفية التصميم الأول: تدرج أزرق داكن مع تأثير ضوئي ونقشة تقنية */
   background-color: var(--bg-dark);
+  /* خلفية تقنية مع دوائر إلكترونية */
   background-image: 
     radial-gradient(circle at 20% 30%, rgba(56, 189, 248, 0.15) 0%, transparent 40%),
     radial-gradient(circle at 80% 70%, rgba(56, 189, 248, 0.1) 0%, transparent 40%),
-    url('https://www.transparenttextures.com/patterns/circuit-board.png'); /* نقش الدوائر الإلكترونية */
+    url('https://www.transparenttextures.com/patterns/circuit-board.png'); 
   background-attachment: fixed;
+  padding-bottom: 100px; /* مساحة للزر السفلي */
 }
 
-/* الهيدر المحترف */
+/* 🔝 الهيدر */
 header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 15px 5%;
-  background: rgba(2, 6, 23, 0.8);
+  background: rgba(2, 6, 23, 0.85);
   backdrop-filter: blur(15px);
   position: sticky;
   top: 0;
@@ -41,297 +43,319 @@ header {
   border-bottom: 1px solid rgba(56, 189, 248, 0.2);
 }
 
-h1 {
-  color: var(--accent-blue);
-  font-size: 24px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-}
+header h1 { color: var(--accent-blue); font-size: 22px; letter-spacing: 1px; }
 
-/* القائمة العلوية (مثل التصميم 1) */
-nav {
-    display: flex;
-    gap: 20px;
-}
-nav a {
+/* 🛒 أيقونة الكرية (السلة) */
+.cart-trigger {
+    background: rgba(30, 41, 59, 0.8);
+    border: 1px solid var(--accent-blue);
     color: white;
-    text-decoration: none;
-    font-size: 14px;
+    padding: 8px 15px;
+    border-radius: 50px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
     transition: 0.3s;
 }
-nav a:hover { color: var(--accent-blue); }
+.cart-trigger:hover { background: var(--accent-blue); color: #000; }
 
-/* الأزرار */
-.btn-primary {
-  background: var(--accent-blue);
-  color: #020617;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: 0.3s;
-  box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
-}
-
-.btn-primary:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 25px rgba(56, 189, 248, 0.6);
-}
-
-/* HERO SECTION */
-.hero {
-  text-align: center;
-  padding: 80px 20px;
-}
-
+/* 🚀 قسم الترحيب */
+.hero { text-align: center; padding: 50px 20px; }
 .hero h2 {
-  font-size: 32px;
-  max-width: 800px;
-  margin: auto;
+  font-size: 35px;
   background: linear-gradient(to left, #fff, var(--accent-blue));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  line-height: 1.4;
+  margin-bottom: 15px;
 }
+.hero p { color: #94a3b8; font-size: 18px; max-width: 600px; margin: auto; line-height: 1.6; }
 
-/* المنتجات بتصميم زجاجي (Glassmorphism) */
-.container { padding: 40px 5%; }
+/* 📦 شبكة المنتجات */
+.container { padding: 0 5%; }
 .cards {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 25px;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
 }
 
 .card {
   background: var(--card-bg);
-  padding: 20px;
+  padding: 15px;
   border-radius: 15px;
   border: 1px solid rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(5px);
   transition: 0.4s;
+  display: flex;
+  flex-direction: column;
 }
+.card:hover { border-color: var(--accent-blue); transform: translateY(-5px); box-shadow: var(--glow); }
 
-.card:hover {
-  border-color: var(--accent-blue);
-  transform: translateY(-10px);
-}
+.card img { width: 100%; height: 200px; object-fit: cover; border-radius: 10px; margin-bottom: 12px; }
+.card h3 { font-size: 18px; margin-bottom: 8px; color: #f8fafc; }
+.card p { font-size: 14px; color: #94a3b8; flex-grow: 1; margin-bottom: 10px; }
+.price { font-size: 20px; color: #22c55e; font-weight: bold; margin-bottom: 15px; }
 
-.card img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  border-radius: 10px;
-  margin-bottom: 15px;
-}
-
-.price {
-    font-size: 22px;
-    color: var(--accent-blue);
-    margin: 10px 0;
+/* 🔘 أزرار البطاقة */
+.buy-btn {
+    background: var(--accent-blue);
+    color: #000;
+    border: none;
+    padding: 10px;
+    border-radius: 8px;
     font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.buy-btn:hover { background: #7dd3fc; }
+
+.del-btn {
+    background: none;
+    color: #ef4444;
+    border: none;
+    margin-top: 10px;
+    font-size: 12px;
+    cursor: pointer;
 }
 
-/* السلة */
+/* ➕ زر إضافة المنتج (في الأسفل والمنتصف) */
+.fixed-add-btn {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--accent-blue);
+    color: #020617;
+    padding: 15px 35px;
+    border-radius: 50px;
+    font-weight: bold;
+    font-size: 18px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 5px 25px rgba(56, 189, 248, 0.5);
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: 0.3s;
+}
+.fixed-add-btn:hover { transform: translateX(-50%) scale(1.05); background: #7dd3fc; }
+
+/* 🛒 السلة الجانبية */
 .cart-sidebar {
-  position: fixed;
-  top: 0;
-  right: -350px;
-  width: 320px;
-  height: 100%;
-  background: #0f172a;
-  padding: 20px;
-  transition: 0.4s;
-  z-index: 2000;
+  position: fixed; top: 0; right: -350px; width: 320px; height: 100%;
+  background: #0f172a; padding: 20px; transition: 0.4s; z-index: 2000;
   border-left: 2px solid var(--accent-blue);
+  display: flex; flex-direction: column;
 }
 .cart-sidebar.open { right: 0; }
+.cart-items { flex-grow: 1; overflow-y: auto; margin-top: 20px; }
 
-/* واتساب */
-.whatsapp {
-  position: fixed;
-  bottom: 25px;
-  left: 25px;
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  background: linear-gradient(145deg, #25D366, #1aa34a);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 30px;
-  color: white;
-  text-decoration: none;
-  box-shadow: 0 0 20px rgba(37, 211, 102, 0.5);
-  transition: 0.3s;
-}
-
-/* الفورم */
+/* 📝 الفورم */
 .form-overlay {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.85);
-    justify-content: center;
-    align-items: center;
-    z-index: 3000;
+    display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85);
+    justify-content: center; align-items: center; z-index: 3000;
 }
-.form-box {
-    background: #1e293b;
-    padding: 30px;
-    border-radius: 15px;
-    width: 90%;
-    max-width: 400px;
-    border: 1px solid var(--accent-blue);
+.form-box { background: #1e293b; padding: 30px; border-radius: 20px; width: 90%; max-width: 400px; border: 1px solid var(--accent-blue); }
+input, textarea { width: 100%; padding: 12px; margin: 10px 0; background: #020617; color: white; border: 1px solid #334155; border-radius: 8px; }
+
+/* 💬 واتساب */
+.whatsapp-float {
+  position: fixed; bottom: 30px; left: 30px;
+  width: 55px; height: 55px; background: #25D366;
+  border-radius: 50%; display: flex; justify-content: center;
+  align-items: center; color: white; text-decoration: none;
+  font-size: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); z-index: 998;
 }
 
-input, textarea {
-    width: 100%;
-    padding: 12px;
-    margin: 10px 0;
-    background: #020617;
-    border: 1px solid #334155;
-    color: white;
-    border-radius: 8px;
+@media (max-width: 600px) {
+    .fixed-add-btn { width: 80%; padding: 12px; font-size: 16px; }
 }
 </style>
 </head>
 
 <body>
 
+<!-- الهيدر -->
 <header>
   <h1>BI ONE AL</h1>
-  <nav>
-      <a href="#">الرئيسية</a>
-      <a href="#">مشاريعي</a>
-      <a href="#">خدماتي</a>
-      <a href="#">تواصل</a>
-  </nav>
-  <div class="top-actions">
-    <button class="btn-primary" onclick="openForm()">➕ إضافة منتج</button>
-    <button onclick="toggleCart()" style="background:none; border:1px solid #38bdf8; color:white; padding:10px; border-radius:5px; cursor:pointer">🛒 السلة (<span id="count">0</span>)</button>
+  <div class="cart-trigger" onclick="toggleCart()">
+      <span>🛒 الكرية</span>
+      <span id="cartCount" style="background:red; padding:2px 7px; border-radius:50%; font-size:12px">0</span>
   </div>
 </header>
 
+<!-- قسم الواجهة -->
 <div class="hero">
-  <h2>نحوِّل الأفكار إلى تجارب رقمية مذهلة</h2>
-  <p style="color:#94a3b8; margin-top:15px;">متجر Bi One Al لبيع أحدث الحلول البرمجية والمنتجات التقنية</p>
+  <h2>دنيتك الكل في بلاصة واحدة! 🇹🇳</h2>
+  <p>
+    كل شي موجود: لبسة، صبابط، تليفونات، أثاث الدار.. جديد وإلا مستعمل، نظيف وبأرخص الأسعار!
+  </p>
 </div>
 
+<!-- قائمة السلع -->
 <div class="container">
   <div class="cards" id="list"></div>
 </div>
 
-<!-- فورم الإضافة -->
+<!-- ➕ زر الإضافة المركزي في الأسفل -->
+<button class="fixed-add-btn" onclick="openForm()">
+    <span>➕ زيد سلعة جديدة</span>
+</button>
+
+<!-- فورم إضافة سلعة -->
 <div class="form-overlay" id="formOverlay">
   <div class="form-box">
-    <h3>إضافة منتج تقني جديد</h3>
-    <input id="title" placeholder="اسم المنتج">
-    <textarea id="desc" placeholder="وصف سريع"></textarea>
+    <h3 style="margin-bottom:15px">هبّط سلعة للبيع</h3>
+    <input id="title" placeholder="شنوة السلعة؟">
+    <textarea id="desc" placeholder="وصف صغير (الحالة، المقاس، جديد أو مستعمل...)"></textarea>
     <input type="number" id="price" placeholder="السعر (د.ت)">
-    <input type="file" id="imageInput">
-    <button class="btn-primary" style="width:100%" onclick="saveProduct()">حفظ المنتج</button>
-    <button onclick="closeForm()" style="background:none; color:white; width:100%; margin-top:10px; border:none; cursor:pointer">إلغاء</button>
+    <p style="font-size:12px; color:#94a3b8; margin-top:5px">تصويرة السلعة:</p>
+    <input type="file" id="imageInput" accept="image/*">
+    <button class="buy-btn" style="width:100%; margin-top:15px; padding:15px" onclick="saveProduct()">حفظ وتعدّى ✅</button>
+    <button onclick="closeForm()" style="background:none; color:#94a3b8; width:100%; margin-top:10px; border:none; cursor:pointer">إلغاء</button>
   </div>
 </div>
 
-<!-- سلة المشتريات -->
+<!-- الكرية (السلة) -->
 <div class="cart-sidebar" id="cartSidebar">
-    <div style="display:flex; justify-content:space-between; margin-bottom:20px">
-        <h3>سلة التسوق</h3>
-        <button onclick="toggleCart()" style="background:none; border:none; color:white; font-size:20px; cursor:pointer">✕</button>
+    <div style="display:flex; justify-content:space-between; align-items:center">
+        <h3>قضيتك (الكرية)</h3>
+        <button onclick="toggleCart()" style="background:none; border:none; color:white; font-size:24px; cursor:pointer">✕</button>
     </div>
-    <div id="cartItems"></div>
-    <hr style="margin:20px 0; border:0; border-top:1px solid #334155">
-    <div id="totalPrice" style="font-weight:bold; font-size:18px">الإجمالي: 0 د.ت</div>
-    <button class="btn-primary" style="width:100%; margin-top:20px" onclick="sendToWhatsApp()">إرسال الطلب عبر واتساب</button>
+    <div class="cart-items" id="cartItems">
+        <!-- السلع المضافة تظهر هنا -->
+    </div>
+    <div id="totalPrice" style="padding:15px 0; border-top:1px solid #334155; font-weight:bold; font-size:18px">
+        الحساب: 0 د.ت
+    </div>
+    <button class="buy-btn" style="width:100%; padding:15px; font-size:18px" onclick="sendToWhatsApp()">أبعث الطلب واتساب ✅</button>
 </div>
 
-<a class="whatsapp" href="https://wa.me/21694622377" target="_blank">💬</a>
+<!-- أيقونة واتساب -->
+<a class="whatsapp-float" href="https://wa.me/21694622377" target="_blank">💬</a>
 
 <script>
-let products = JSON.parse(localStorage.getItem("bi_one_products") || "[]");
+// تخزين البيانات
+let products = JSON.parse(localStorage.getItem("bi_one_master") || "[]");
 let cart = [];
 
+// عرض المنتجات عند التحميل
 function render(){
-  const box = document.getElementById("list");
-  box.innerHTML = "";
+  const listDiv = document.getElementById("list");
+  listDiv.innerHTML = "";
+
+  if(products.length === 0) {
+      listDiv.innerHTML = `<p style="grid-column: 1/-1; text-align:center; color:#64748b; padding:40px">حتى الآن ما ثمة حتى سلعة، كون إنت الأول وزيد سلعتك!</p>`;
+  }
+
   products.forEach((p, index) => {
-    box.innerHTML += `
+    listDiv.innerHTML += `
       <div class="card">
-        <img src="${p.img}">
+        <img src="${p.img || 'https://via.placeholder.com/250'}">
         <h3>${p.title}</h3>
-        <p style="font-size:13px; color:#94a3b8; margin:10px 0;">${p.desc}</p>
+        <p>${p.desc}</p>
         <div class="price">${p.price} د.ت</div>
-        <button class="btn-primary" style="width:100%" onclick="addToCart(${index})">إضافة للسلة</button>
-        <button onclick="deleteProduct(${index})" style="background:none; color:#ef4444; border:none; margin-top:10px; cursor:pointer; width:100%; font-size:12px">حذف المنتج</button>
+        <button class="buy-btn" onclick="addToCart(${index})">حط في الكرية</button>
+        <button class="del-btn" onclick="deleteProduct(${index})">فسّخ السلعة</button>
       </div>
     `;
   });
 }
 
+// حفظ المنتج الجديد
 function saveProduct(){
   const title = document.getElementById("title").value;
   const desc = document.getElementById("desc").value;
   const price = document.getElementById("price").value;
-  const file = document.getElementById("imageInput").files[0];
+  const imageFile = document.getElementById("imageInput").files[0];
 
-  if(!title || !price || !file) return alert("يرجى إكمال البيانات");
+  if(!title || !price || !imageFile) return alert("عيّش خويا كمّل عمّر البيانات الكل!");
 
   const reader = new FileReader();
   reader.onload = function(e){
-    products.push({ title, desc, price, img: e.target.result });
-    localStorage.setItem("bi_one_products", JSON.stringify(products));
+    products.push({
+      title, desc, price, img: e.target.result
+    });
+    localStorage.setItem("bi_one_master", JSON.stringify(products));
     render();
     closeForm();
+    // تنظيف الخانات
+    document.getElementById("title").value = "";
+    document.getElementById("desc").value = "";
+    document.getElementById("price").value = "";
   }
-  reader.readAsDataURL(file);
+  reader.readAsDataURL(imageFile);
 }
 
+// حذف المنتج
 function deleteProduct(index){
-    if(confirm("هل تريد الحذف؟")){
+    if(confirm("متاكد تحب تفسخ السلعة هاذي؟")){
         products.splice(index, 1);
-        localStorage.setItem("bi_one_products", JSON.stringify(products));
+        localStorage.setItem("bi_one_master", JSON.stringify(products));
         render();
     }
 }
 
+// السلة (الكرية)
 function addToCart(index){
     cart.push(products[index]);
     updateCartUI();
-    toggleCart();
+    // تفتيح السلة تلقائياً عند أول إضافة
+    if(!document.getElementById("cartSidebar").classList.contains("open")) toggleCart();
+}
+
+function removeFromCart(index){
+    cart.splice(index, 1);
+    updateCartUI();
 }
 
 function updateCartUI(){
-    const list = document.getElementById("cartItems");
+    const cartList = document.getElementById("cartItems");
     const totalDiv = document.getElementById("totalPrice");
-    const count = document.getElementById("count");
-    list.innerHTML = "";
+    const countSpan = document.getElementById("cartCount");
+    
+    cartList.innerHTML = "";
     let total = 0;
 
     cart.forEach((item, i) => {
         total += parseFloat(item.price);
-        list.innerHTML += `<div style="display:flex; justify-content:space-between; margin-bottom:10px">
-            <span>${item.title}</span>
-            <span>${item.price} د.ت</span>
-        </div>`;
+        cartList.innerHTML += `
+            <div style="display:flex; justify-content:space-between; background:rgba(255,255,255,0.05); padding:10px; border-radius:8px; margin-bottom:10px">
+                <div>
+                    <div style="font-weight:bold">${item.title}</div>
+                    <div style="color:var(--accent-blue)">${item.price} د.ت</div>
+                </div>
+                <button onclick="removeFromCart(${i})" style="background:none; border:none; color:#ef4444; cursor:pointer">فسّخ</button>
+            </div>
+        `;
     });
 
-    totalDiv.innerText = `الإجمالي: ${total} د.ت`;
-    count.innerText = cart.length;
+    totalDiv.innerText = `الحساب الجملي: ${total} د.ت`;
+    countSpan.innerText = cart.length;
 }
 
+// الطلب عبر واتساب
 function sendToWhatsApp(){
-    if(cart.length === 0) return alert("السلة فارغة");
-    let msg = "طلب جديد من Bi One Al:%0A";
-    cart.forEach(item => msg += `- ${item.title} (${item.price} د.ت)%0A`);
-    window.open(`https://wa.me/21694622377?text=${msg}`);
+    if(cart.length === 0) return alert("الكرية فارغة!");
+    
+    let text = "أهلاً Bi One Al، نحب نشري هاذم:%0A";
+    let total = 0;
+    cart.forEach((item, i) => {
+        text += `${i+1}. ${item.title} (${item.price} د.ت)%0A`;
+        total += parseFloat(item.price);
+    });
+    text += `%0Aالحساب الجملي: ${total} د.ت`;
+    
+    window.open(`https://wa.me/21694622377?text=${text}`, "_blank");
 }
 
+// فتح وإغلاق النوافذ
 function openForm(){ document.getElementById("formOverlay").style.display="flex"; }
 function closeForm(){ document.getElementById("formOverlay").style.display="none"; }
 function toggleCart(){ document.getElementById("cartSidebar").classList.toggle("open"); }
 
+// التشغيل الأولي
 render();
 </script>
 
