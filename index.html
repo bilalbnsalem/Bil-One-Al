@@ -90,4 +90,47 @@
 </footer>
 
 </body>
+  <script>
+let projects = JSON.parse(localStorage.getItem("projects") || "[]");
+
+function openForm(){
+  document.getElementById("projectForm").style.display = "block";
+}
+
+function saveProject(){
+  const file = document.getElementById("imageInput").files[0];
+  const title = document.getElementById("titleInput").value;
+  const desc = document.getElementById("descInput").value;
+
+  const reader = new FileReader();
+  reader.onload = function(){
+    const project = {
+      image: reader.result,
+      title: title,
+      desc: desc
+    };
+    projects.push(project);
+    localStorage.setItem("projects", JSON.stringify(projects));
+    displayProjects();
+    document.getElementById("projectForm").style.display = "none";
+  };
+  reader.readAsDataURL(file);
+}
+
+function displayProjects(){
+  const container = document.getElementById("projectsContainer");
+  container.innerHTML = "";
+  projects.forEach(p => {
+    container.innerHTML += `
+      <div class="card">
+        <img src="${p.image}" style="width:100%;border-radius:10px;">
+        <h3>${p.title}</h3>
+        <p>${p.desc}</p>
+      </div>
+    `;
+  });
+}
+
+displayProjects();
+  </script>
 </html>
