@@ -3,15 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>متجر الذكي للتسوق</title>
+<title>Bil-One-Al</title>
 
 <style>
 *{box-sizing:border-box;font-family:Arial;margin:0;padding:0}
 
 body{
-  background:linear-gradient(135deg,#0f172a,#1e293b,#0b1220);
   color:white;
   min-height:100vh;
+
+  /* 🎨 خلفية تجارة إلكترونية احترافية */
+  background:
+    linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.8)),
+    url("https://images.unsplash.com/photo-1607082349566-187342175e2f");
+  background-size:cover;
+  background-position:center;
+  background-attachment:fixed;
 }
 
 /* HEADER */
@@ -20,21 +27,21 @@ header{
   justify-content:space-between;
   align-items:center;
   padding:15px 20px;
-  background:#0b1220;
+  background:rgba(10,15,30,0.7);
+  backdrop-filter:blur(10px);
 }
 
-.brand{
+/* NAME */
+h1{
+  color:#38bdf8;
+  font-size:20px;
+}
+
+/* RIGHT BUTTONS */
+.top-actions{
   display:flex;
-  align-items:center;
   gap:10px;
-}
-
-.logo{
-  width:12px;
-  height:12px;
-  background:#38bdf8;
-  border-radius:50%;
-  box-shadow:0 0 10px #38bdf8;
+  align-items:center;
 }
 
 /* BUTTON */
@@ -47,21 +54,23 @@ button{
   cursor:pointer;
 }
 
+/* CART BUTTON */
+.cart-btn{
+  background:#1e293b;
+  color:white;
+  padding:10px 12px;
+  border-radius:20px;
+  cursor:pointer;
+}
+
 /* HERO */
 .hero{
   text-align:center;
-  padding:30px 20px;
-}
-
-.hero img{
-  width:300px;
-  border-radius:20px;
-  margin-bottom:15px;
-  box-shadow:0 20px 60px rgba(0,0,0,0.5);
+  padding:50px 20px;
 }
 
 .hero h2{
-  font-size:18px;
+  font-size:20px;
   max-width:700px;
   margin:auto;
 }
@@ -78,9 +87,10 @@ button{
 }
 
 .card{
-  background:#1e293b;
+  background:rgba(30,41,59,0.9);
   padding:10px;
   border-radius:12px;
+  backdrop-filter:blur(5px);
 }
 
 .card img{
@@ -116,18 +126,6 @@ input,textarea{
 }
 
 /* CART */
-.cart-btn{
-  position:fixed;
-  top:10px;
-  left:10px;
-  background:#38bdf8;
-  color:black;
-  padding:10px 12px;
-  border-radius:20px;
-  cursor:pointer;
-  font-weight:bold;
-}
-
 .cart{
   position:fixed;
   top:0;
@@ -141,21 +139,40 @@ input,textarea{
 
 .cart.open{right:0}
 
-/* WHATSAPP */
+/* 💬 WHATSAPP 3D ICON */
 .whatsapp{
   position:fixed;
   bottom:20px;
   left:20px;
-  width:60px;
-  height:60px;
-  background:linear-gradient(135deg,#25D366,#1ebe5d);
+
+  width:65px;
+  height:65px;
   border-radius:50%;
+
+  background:linear-gradient(145deg,#25D366,#1aa34a);
+  box-shadow:
+    6px 6px 15px rgba(0,0,0,0.6),
+    -3px -3px 10px rgba(255,255,255,0.1);
+
   display:flex;
   justify-content:center;
   align-items:center;
-  font-size:26px;
-  text-decoration:none;
+  font-size:28px;
   color:white;
+  text-decoration:none;
+
+  transition:0.3s;
+}
+
+.whatsapp:hover{
+  transform:scale(1.1) rotate(-5deg);
+}
+
+/* TOP RIGHT LAYOUT */
+.top-actions{
+  display:flex;
+  align-items:center;
+  gap:10px;
 }
 </style>
 </head>
@@ -164,28 +181,20 @@ input,textarea{
 
 <!-- HEADER -->
 <header>
-  <div class="brand">
-    <div class="logo"></div>
-    <h2 style="color:#38bdf8;font-size:18px;">متجر الذكي للتسوق</h2>
-  </div>
+  <h1>Bil-One-Al</h1>
 
-  <button onclick="openForm()">➕ إضافة منتج</button>
+  <!-- 🔥 زر إضافة المنتج فوق السلة -->
+  <div class="top-actions">
+    <button onclick="openForm()">➕ إضافة منتج</button>
+    <div class="cart-btn" onclick="toggleCart()">🛒 السلة</div>
+  </div>
 </header>
 
 <!-- HERO -->
 <div class="hero">
-  <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30">
   <h2>
-    متجر ذكي يجمع بين البساطة في التسوق، الدقة في الاختيار، والسرعة في التوصيل. نحن هنا لنقدم لك تجربة شراء استثنائية.
+    متجر إلكتروني احترافي لبيع المنتجات بسهولة وسرعة مع تجربة تسوق عصرية وآمنة
   </h2>
-</div>
-
-<!-- CART -->
-<div class="cart-btn" onclick="toggleCart()">🛒 السلة</div>
-
-<div class="cart" id="cart">
-  <h3>السلة</h3>
-  <div id="cartItems"></div>
 </div>
 
 <!-- PRODUCTS -->
@@ -207,52 +216,54 @@ input,textarea{
   </div>
 </div>
 
-<!-- WHATSAPP -->
+<!-- CART -->
+<div class="cart" id="cart"></div>
+
+<!-- 💬 WHATSAPP 3D -->
 <a class="whatsapp" href="https://wa.me/21694622377" target="_blank">💬</a>
 
 <script>
 
 let products = JSON.parse(localStorage.getItem("products") || "[]");
-let cart = [];
 
-if(products.length === 0){
-  products = [{
-    title:"منتج تجريبي",
-    desc:"منتج مثال",
-    images:["https://images.unsplash.com/photo-1523275335684-37898b6baf30"]
-  }];
-  localStorage.setItem("products",JSON.stringify(products));
+/* demo product */
+if(products.length===0){
+  products=[
+    {
+      title:"منتج تجريبي",
+      desc:"وصف منتج",
+      images:["https://images.unsplash.com/photo-1607082349566-187342175e2f"]
+    }
+  ];
 }
 
-/* عرض المنتجات */
+/* render */
 function render(){
   let box=document.getElementById("list");
   box.innerHTML="";
 
-  products.forEach((p,i)=>{
+  products.forEach((p)=>{
     box.innerHTML+=`
       <div class="card">
         <img src="${p.images[0]}">
         <h3>${p.title}</h3>
         <p>${p.desc}</p>
-        <button onclick="addCart(${i})">أضف للسلة</button>
       </div>
     `;
   });
 }
 
-/* إضافة منتج */
+/* add */
 function add(){
   let files=images.files;
   let imgs=[];
-  let c=0;
 
   for(let f of files){
     let r=new FileReader();
     r.onload=()=>{
       imgs.push(r.result);
-      c++;
-      if(c===files.length){
+
+      if(imgs.length===files.length){
         products.push({
           title:title.value,
           desc:desc.value,
@@ -268,14 +279,7 @@ function add(){
   }
 }
 
-/* سلة */
-function addCart(i){
-  cart.push(products[i]);
-  document.getElementById("cartItems").innerHTML =
-    cart.map(c=>`<div style="margin:10px 0">${c.title}</div>`).join("");
-}
-
-/* فتح/إغلاق */
+/* UI */
 function openForm(){form.style.display="flex"}
 function closeForm(){form.style.display="none"}
 function toggleCart(){cart.classList.toggle("open")}
