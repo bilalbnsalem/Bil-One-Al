@@ -14,12 +14,10 @@ body{
   color:#e2e8f0;
   line-height:1.7;
   overflow-x:hidden;
-
-  /* ✨ خلفية احترافية جديدة */
   background: radial-gradient(circle at top, #1b2a4a, #0f172a 40%, #050814);
 }
 
-/* ✨ خلفية متحركة (Glow Shapes) */
+/* خلفية */
 body::before,
 body::after{
   content:"";
@@ -33,17 +31,8 @@ body::after{
   animation: move 12s infinite alternate ease-in-out;
 }
 
-body::before{
-  background:#38bdf8;
-  top:-100px;
-  left:-100px;
-}
-
-body::after{
-  background:#a855f7;
-  bottom:-120px;
-  right:-120px;
-}
+body::before{background:#38bdf8;top:-100px;left:-100px;}
+body::after{background:#a855f7;bottom:-120px;right:-120px;}
 
 @keyframes move{
   0%{transform:translate(0,0)}
@@ -93,127 +82,70 @@ nav a:hover{color:#38bdf8}
   font-size:14px
 }
 
-.hero h2{font-size:52px;margin-bottom:14px}
+.hero h2{font-size:32px;margin-bottom:14px}
 .hero h2 span{color:#38bdf8}
-.hero p{max-width:700px;color:#cbd5e1}
 
-.hero .cta{
-  margin-top:26px;
-  display:flex;
-  gap:12px;
-  flex-wrap:wrap;
-  justify-content:center
-}
-
-.btn{
-  padding:12px 22px;
-  background:#38bdf8;
-  color:#0f172a;
-  border:none;
+/* زر واتساب */
+.whatsapp{
+  display:inline-block;
+  margin-top:20px;
+  background:#25D366;
+  color:#fff;
+  padding:12px 18px;
   border-radius:8px;
   text-decoration:none;
   font-weight:bold;
-  cursor:pointer
 }
 
-.btn.outline{
-  background:transparent;
-  color:#38bdf8;
-  border:1px solid #38bdf8
-}
-
+/* المنتجات */
 section{padding:80px 10%}
-h2.section-title{font-size:32px;margin-bottom:10px}
-p.section-sub{color:#94a3b8}
 
 .cards{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
   gap:20px;
-  margin-top:40px
 }
 
 .card{
   background:#1e293b;
-  padding:18px;
-  border-radius:12px
-}
-
-.card img{width:100%;border-radius:10px;margin-bottom:10px}
-
-footer{
-  text-align:center;
-  padding:30px;
-  background:#0b1220cc;
-  backdrop-filter: blur(10px);
-  margin-top:50px;
-  color:#94a3b8
-}
-
-/* Popup */
-.popup{
-  display:none;
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,0.7);
-  justify-content:center;
-  align-items:center;
-  padding:20px
-}
-
-.popup-content{
-  background:#1e293b;
-  padding:20px;
+  padding:15px;
   border-radius:12px;
-  width:100%;
-  max-width:420px
 }
 
-.popup-content input,
-.popup-content textarea{
+/* سلايدر الصور داخل المنتج */
+.slider{
+  position:relative;
   width:100%;
-  padding:10px;
-  border-radius:8px;
-  border:none;
-  margin-bottom:10px
+  height:200px;
+  overflow:hidden;
+  border-radius:10px;
 }
 
-/* WhatsApp Button */
-.whatsapp{
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  margin-top:15px;
-  background:#25D366;
+.slider img{
+  width:100%;
+  height:200px;
+  object-fit:cover;
+  display:none;
+}
+
+.slider img.active{
+  display:block;
+}
+
+.slider button{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  background:rgba(0,0,0,0.5);
   color:white;
-  padding:12px 18px;
-  border-radius:8px;
-  text-decoration:none;
-  font-weight:bold;
-  transition:0.3s
-}
-
-.whatsapp:hover{
-  transform:scale(1.05);
-  background:#1ebe5d;
-}
-
-.action-btn{
-  margin-top:8px;
-  margin-left:6px;
-  padding:8px 12px;
   border:none;
-  border-radius:6px;
   cursor:pointer;
-  color:#fff
+  padding:5px 10px;
 }
 
-.edit{background:#f59e0b}
-.delete{background:#ef4444}
+.prev{left:5px}
+.next{right:5px}
 
-@media(max-width:768px){
-  .hero h2{font-size:34px}
-}
 </style>
 </head>
 
@@ -221,10 +153,6 @@ footer{
 
 <header>
   <h1>Bil One Al</h1>
-  <nav>
-    <a href="#projects">مشاريعي</a>
-    <a href="#contact">تواصل</a>
-  </nav>
 </header>
 
 <!-- HERO -->
@@ -232,95 +160,78 @@ footer{
 
   <img src="file_00000000ac3c71f7a1b105db20571fdc.png" class="hero-image">
 
-  <div class="hero-badge">BI ONE AL • Portfolio</div>
+  <div class="hero-badge">BI ONE AL • Shop</div>
 
-  <h2>أبني تجارب ويب <span>ذكية وعصرية</span></h2>
+  <!-- النص الجديد -->
+  <h2>
+    بساطة في التسوق دقة في الاختيار وسرعة في التوصيل نحن هنا لخدمتكم
+  </h2>
 
-  <p>مطور ويب مهتم بالذكاء الاصطناعي وبناء واجهات حديثة وسريعة.</p>
-
-  <div class="cta">
-    <a href="#projects" class="btn">شاهد أعمالي</a>
-    <a href="#contact" class="btn outline">تواصل معي</a>
-  </div>
+  <a class="whatsapp" href="https://wa.me/21694622377" target="_blank">
+    📱 تواصل واتساب
+  </a>
 </div>
 
-<!-- PROJECTS -->
-<section id="projects">
-  <h2 class="section-title">مشاريعي</h2>
+<!-- المنتجات (بدون كلمة "مشاريعي") -->
+<section>
 
-  <button class="btn" onclick="openForm()">➕ إضافة مشروع</button>
-
-  <div id="popup" class="popup">
-    <div class="popup-content">
-      <h3>إضافة / تعديل مشروع</h3>
-      <input type="file" id="imageInput">
-      <input type="text" id="titleInput" placeholder="اسم المشروع">
-      <textarea id="descInput" rows="4" placeholder="الوصف"></textarea>
-      <button class="btn" onclick="saveProject()">حفظ</button>
-      <button class="btn" style="background:#ef4444" onclick="closeForm()">إغلاق</button>
-    </div>
-  </div>
-
-  <div class="cards" id="projectsContainer"></div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact">
-  <h2 class="section-title">تواصل معي</h2>
-  <p class="section-sub">إذا كنت تريد شراء منتج أو التواصل السريع:</p>
-
-  <!-- WhatsApp -->
-  <a class="whatsapp" href="https://wa.me/21694622377" target="_blank">
-    📱 تواصل عبر واتساب
-  </a>
+  <div class="cards" id="products"></div>
 
 </section>
-
-<footer>
-  © 2026 Bil One Al
-</footer>
 
 <script>
-let projects = JSON.parse(localStorage.getItem("projects") || "[]");
-let editIndex = null;
-
-function openForm(){popup.style.display="flex"}
-function closeForm(){popup.style.display="none"}
-
-function saveProject(){
-  const file=imageInput.files[0];
-  const title=titleInput.value;
-  const desc=descInput.value;
-
-  const save=(img)=>{
-    const p={image:img,title,desc};
-    if(editIndex!=null) projects[editIndex]=p;
-    else projects.push(p);
-    localStorage.setItem("projects",JSON.stringify(projects));
-    display(); closeForm();
+// منتجات مع عدة صور
+let data = [
+  {
+    title:"منتج 1",
+    desc:"وصف المنتج",
+    images:[
+      "https://picsum.photos/400/300?1",
+      "https://picsum.photos/400/300?2",
+      "https://picsum.photos/400/300?3"
+    ]
   }
+];
 
-  if(file){
-    const r=new FileReader();
-    r.onload=()=>save(r.result);
-    r.readAsDataURL(file);
-  }else save("");
-}
+function render(){
+  let box=document.getElementById("products");
+  box.innerHTML="";
 
-function display(){
-  const c=document.getElementById("projectsContainer");
-  c.innerHTML="";
-  projects.forEach((p,i)=>{
-    c.innerHTML+=`
-      <div class="card">
-        <img src="${p.image}">
-        <h3>${p.title}</h3>
-        <p>${p.desc}</p>
-      </div>`;
+  data.forEach((p,i)=>{
+    box.innerHTML+=`
+    <div class="card">
+
+      <div class="slider" id="slider${i}">
+        ${p.images.map((img,ix)=>`
+          <img src="${img}" class="${ix===0?'active':''}">
+        `).join('')}
+
+        <button class="prev" onclick="change(${i},-1)">‹</button>
+        <button class="next" onclick="change(${i},1)">›</button>
+      </div>
+
+      <h3>${p.title}</h3>
+      <p>${p.desc}</p>
+
+    </div>`;
   });
 }
-display();
+
+function change(i,dir){
+  let slider=document.querySelectorAll(`#slider${i} img`);
+  let index=[...slider].findIndex(img=>img.classList.contains("active"));
+
+  slider[index].classList.remove("active");
+
+  index+=dir;
+  if(index<0) index=slider.length-1;
+  if(index>=slider.length) index=0;
+
+  slider[index].classList.add("active");
+}
+
+render();
 </script>
 
 </body>
-        </html>
+</html>
