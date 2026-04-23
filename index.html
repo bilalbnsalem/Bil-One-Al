@@ -3,289 +3,336 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bil-One-Al</title>
+<title>Bi One Al | متجرك التقني</title>
 
 <style>
-*{box-sizing:border-box;font-family:Arial;margin:0;padding:0}
+/* تصفير الإعدادات */
+*{box-sizing:border-box; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin:0; padding:0}
 
-body{
-  color:white;
-  min-height:100vh;
-
-  /* 🎨 خلفية تجارة إلكترونية احترافية */
-  background:
-    linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.8)),
-    url("https://images.unsplash.com/photo-1607082349566-187342175e2f");
-  background-size:cover;
-  background-position:center;
-  background-attachment:fixed;
+:root {
+    --bg-dark: #020617; /* لون الخلفية العميق من التصميم 1 */
+    --accent-blue: #38bdf8; /* اللون الأزرق المضيء */
+    --card-bg: rgba(15, 23, 42, 0.8);
 }
 
-/* HEADER */
-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:15px 20px;
-  background:rgba(10,15,30,0.7);
-  backdrop-filter:blur(10px);
+body {
+  color: white;
+  min-height: 100vh;
+  /* 🎨 تطبيق خلفية التصميم الأول: تدرج أزرق داكن مع تأثير ضوئي ونقشة تقنية */
+  background-color: var(--bg-dark);
+  background-image: 
+    radial-gradient(circle at 20% 30%, rgba(56, 189, 248, 0.15) 0%, transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(56, 189, 248, 0.1) 0%, transparent 40%),
+    url('https://www.transparenttextures.com/patterns/circuit-board.png'); /* نقش الدوائر الإلكترونية */
+  background-attachment: fixed;
 }
 
-/* NAME */
-h1{
-  color:#38bdf8;
-  font-size:20px;
+/* الهيدر المحترف */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 5%;
+  background: rgba(2, 6, 23, 0.8);
+  backdrop-filter: blur(15px);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 1px solid rgba(56, 189, 248, 0.2);
 }
 
-/* RIGHT BUTTONS */
-.top-actions{
-  display:flex;
-  gap:10px;
-  align-items:center;
+h1 {
+  color: var(--accent-blue);
+  font-size: 24px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
-/* BUTTON */
-button{
-  background:#38bdf8;
-  border:none;
-  padding:10px 14px;
-  border-radius:8px;
-  font-weight:bold;
-  cursor:pointer;
+/* القائمة العلوية (مثل التصميم 1) */
+nav {
+    display: flex;
+    gap: 20px;
+}
+nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    transition: 0.3s;
+}
+nav a:hover { color: var(--accent-blue); }
+
+/* الأزرار */
+.btn-primary {
+  background: var(--accent-blue);
+  color: #020617;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+  box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
 }
 
-/* CART BUTTON */
-.cart-btn{
-  background:#1e293b;
-  color:white;
-  padding:10px 12px;
-  border-radius:20px;
-  cursor:pointer;
+.btn-primary:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(56, 189, 248, 0.6);
 }
 
-/* HERO */
-.hero{
-  text-align:center;
-  padding:50px 20px;
+/* HERO SECTION */
+.hero {
+  text-align: center;
+  padding: 80px 20px;
 }
 
-.hero h2{
-  font-size:20px;
-  max-width:700px;
-  margin:auto;
+.hero h2 {
+  font-size: 32px;
+  max-width: 800px;
+  margin: auto;
+  background: linear-gradient(to left, #fff, var(--accent-blue));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 1.4;
 }
 
-/* PRODUCTS */
-.container{
-  padding:20px;
+/* المنتجات بتصميم زجاجي (Glassmorphism) */
+.container { padding: 40px 5%; }
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 25px;
 }
 
-.cards{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:15px;
+.card {
+  background: var(--card-bg);
+  padding: 20px;
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+  transition: 0.4s;
 }
 
-.card{
-  background:rgba(30,41,59,0.9);
-  padding:10px;
-  border-radius:12px;
-  backdrop-filter:blur(5px);
+.card:hover {
+  border-color: var(--accent-blue);
+  transform: translateY(-10px);
 }
 
-.card img{
-  width:100%;
-  height:180px;
-  object-fit:cover;
-  border-radius:10px;
+.card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 15px;
 }
 
-/* FORM */
-.form{
-  display:none;
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,0.7);
-  justify-content:center;
-  align-items:center;
+.price {
+    font-size: 22px;
+    color: var(--accent-blue);
+    margin: 10px 0;
+    font-weight: bold;
 }
 
-.box{
-  background:#1e293b;
-  padding:20px;
-  width:320px;
-  border-radius:10px;
+/* السلة */
+.cart-sidebar {
+  position: fixed;
+  top: 0;
+  right: -350px;
+  width: 320px;
+  height: 100%;
+  background: #0f172a;
+  padding: 20px;
+  transition: 0.4s;
+  z-index: 2000;
+  border-left: 2px solid var(--accent-blue);
+}
+.cart-sidebar.open { right: 0; }
+
+/* واتساب */
+.whatsapp {
+  position: fixed;
+  bottom: 25px;
+  left: 25px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #25D366, #1aa34a);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+  color: white;
+  text-decoration: none;
+  box-shadow: 0 0 20px rgba(37, 211, 102, 0.5);
+  transition: 0.3s;
 }
 
-input,textarea{
-  width:100%;
-  margin:5px 0;
-  padding:10px;
-  border:none;
-  border-radius:6px;
+/* الفورم */
+.form-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    justify-content: center;
+    align-items: center;
+    z-index: 3000;
+}
+.form-box {
+    background: #1e293b;
+    padding: 30px;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 400px;
+    border: 1px solid var(--accent-blue);
 }
 
-/* CART */
-.cart{
-  position:fixed;
-  top:0;
-  right:-320px;
-  width:280px;
-  height:100%;
-  background:#0b1220;
-  padding:15px;
-  transition:0.3s;
-}
-
-.cart.open{right:0}
-
-/* 💬 WHATSAPP 3D ICON */
-.whatsapp{
-  position:fixed;
-  bottom:20px;
-  left:20px;
-
-  width:65px;
-  height:65px;
-  border-radius:50%;
-
-  background:linear-gradient(145deg,#25D366,#1aa34a);
-  box-shadow:
-    6px 6px 15px rgba(0,0,0,0.6),
-    -3px -3px 10px rgba(255,255,255,0.1);
-
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  font-size:28px;
-  color:white;
-  text-decoration:none;
-
-  transition:0.3s;
-}
-
-.whatsapp:hover{
-  transform:scale(1.1) rotate(-5deg);
-}
-
-/* TOP RIGHT LAYOUT */
-.top-actions{
-  display:flex;
-  align-items:center;
-  gap:10px;
+input, textarea {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    background: #020617;
+    border: 1px solid #334155;
+    color: white;
+    border-radius: 8px;
 }
 </style>
 </head>
 
 <body>
 
-<!-- HEADER -->
 <header>
-  <h1>Bil-One-Al</h1>
-
-  <!-- 🔥 زر إضافة المنتج فوق السلة -->
+  <h1>BI ONE AL</h1>
+  <nav>
+      <a href="#">الرئيسية</a>
+      <a href="#">مشاريعي</a>
+      <a href="#">خدماتي</a>
+      <a href="#">تواصل</a>
+  </nav>
   <div class="top-actions">
-    <button onclick="openForm()">➕ إضافة منتج</button>
-    <div class="cart-btn" onclick="toggleCart()">🛒 السلة</div>
+    <button class="btn-primary" onclick="openForm()">➕ إضافة منتج</button>
+    <button onclick="toggleCart()" style="background:none; border:1px solid #38bdf8; color:white; padding:10px; border-radius:5px; cursor:pointer">🛒 السلة (<span id="count">0</span>)</button>
   </div>
 </header>
 
-<!-- HERO -->
 <div class="hero">
-  <h2>
-    متجر إلكتروني احترافي لبيع المنتجات بسهولة وسرعة مع تجربة تسوق عصرية وآمنة
-  </h2>
+  <h2>نحوِّل الأفكار إلى تجارب رقمية مذهلة</h2>
+  <p style="color:#94a3b8; margin-top:15px;">متجر Bi One Al لبيع أحدث الحلول البرمجية والمنتجات التقنية</p>
 </div>
 
-<!-- PRODUCTS -->
 <div class="container">
   <div class="cards" id="list"></div>
 </div>
 
-<!-- FORM -->
-<div class="form" id="form">
-  <div class="box">
-    <h3>إضافة منتج</h3>
-
+<!-- فورم الإضافة -->
+<div class="form-overlay" id="formOverlay">
+  <div class="form-box">
+    <h3>إضافة منتج تقني جديد</h3>
     <input id="title" placeholder="اسم المنتج">
-    <textarea id="desc" placeholder="الوصف"></textarea>
-    <input type="file" id="images" multiple>
-
-    <button onclick="add()">حفظ</button>
-    <button onclick="closeForm()" style="background:red;margin-top:5px;">إغلاق</button>
+    <textarea id="desc" placeholder="وصف سريع"></textarea>
+    <input type="number" id="price" placeholder="السعر (د.ت)">
+    <input type="file" id="imageInput">
+    <button class="btn-primary" style="width:100%" onclick="saveProduct()">حفظ المنتج</button>
+    <button onclick="closeForm()" style="background:none; color:white; width:100%; margin-top:10px; border:none; cursor:pointer">إلغاء</button>
   </div>
 </div>
 
-<!-- CART -->
-<div class="cart" id="cart"></div>
+<!-- سلة المشتريات -->
+<div class="cart-sidebar" id="cartSidebar">
+    <div style="display:flex; justify-content:space-between; margin-bottom:20px">
+        <h3>سلة التسوق</h3>
+        <button onclick="toggleCart()" style="background:none; border:none; color:white; font-size:20px; cursor:pointer">✕</button>
+    </div>
+    <div id="cartItems"></div>
+    <hr style="margin:20px 0; border:0; border-top:1px solid #334155">
+    <div id="totalPrice" style="font-weight:bold; font-size:18px">الإجمالي: 0 د.ت</div>
+    <button class="btn-primary" style="width:100%; margin-top:20px" onclick="sendToWhatsApp()">إرسال الطلب عبر واتساب</button>
+</div>
 
-<!-- 💬 WHATSAPP 3D -->
 <a class="whatsapp" href="https://wa.me/21694622377" target="_blank">💬</a>
 
 <script>
+let products = JSON.parse(localStorage.getItem("bi_one_products") || "[]");
+let cart = [];
 
-let products = JSON.parse(localStorage.getItem("products") || "[]");
-
-/* demo product */
-if(products.length===0){
-  products=[
-    {
-      title:"منتج تجريبي",
-      desc:"وصف منتج",
-      images:["https://images.unsplash.com/photo-1607082349566-187342175e2f"]
-    }
-  ];
-}
-
-/* render */
 function render(){
-  let box=document.getElementById("list");
-  box.innerHTML="";
-
-  products.forEach((p)=>{
-    box.innerHTML+=`
+  const box = document.getElementById("list");
+  box.innerHTML = "";
+  products.forEach((p, index) => {
+    box.innerHTML += `
       <div class="card">
-        <img src="${p.images[0]}">
+        <img src="${p.img}">
         <h3>${p.title}</h3>
-        <p>${p.desc}</p>
+        <p style="font-size:13px; color:#94a3b8; margin:10px 0;">${p.desc}</p>
+        <div class="price">${p.price} د.ت</div>
+        <button class="btn-primary" style="width:100%" onclick="addToCart(${index})">إضافة للسلة</button>
+        <button onclick="deleteProduct(${index})" style="background:none; color:#ef4444; border:none; margin-top:10px; cursor:pointer; width:100%; font-size:12px">حذف المنتج</button>
       </div>
     `;
   });
 }
 
-/* add */
-function add(){
-  let files=images.files;
-  let imgs=[];
+function saveProduct(){
+  const title = document.getElementById("title").value;
+  const desc = document.getElementById("desc").value;
+  const price = document.getElementById("price").value;
+  const file = document.getElementById("imageInput").files[0];
 
-  for(let f of files){
-    let r=new FileReader();
-    r.onload=()=>{
-      imgs.push(r.result);
+  if(!title || !price || !file) return alert("يرجى إكمال البيانات");
 
-      if(imgs.length===files.length){
-        products.push({
-          title:title.value,
-          desc:desc.value,
-          images:imgs
-        });
-
-        localStorage.setItem("products",JSON.stringify(products));
-        render();
-        closeForm();
-      }
-    }
-    r.readAsDataURL(f);
+  const reader = new FileReader();
+  reader.onload = function(e){
+    products.push({ title, desc, price, img: e.target.result });
+    localStorage.setItem("bi_one_products", JSON.stringify(products));
+    render();
+    closeForm();
   }
+  reader.readAsDataURL(file);
 }
 
-/* UI */
-function openForm(){form.style.display="flex"}
-function closeForm(){form.style.display="none"}
-function toggleCart(){cart.classList.toggle("open")}
+function deleteProduct(index){
+    if(confirm("هل تريد الحذف؟")){
+        products.splice(index, 1);
+        localStorage.setItem("bi_one_products", JSON.stringify(products));
+        render();
+    }
+}
+
+function addToCart(index){
+    cart.push(products[index]);
+    updateCartUI();
+    toggleCart();
+}
+
+function updateCartUI(){
+    const list = document.getElementById("cartItems");
+    const totalDiv = document.getElementById("totalPrice");
+    const count = document.getElementById("count");
+    list.innerHTML = "";
+    let total = 0;
+
+    cart.forEach((item, i) => {
+        total += parseFloat(item.price);
+        list.innerHTML += `<div style="display:flex; justify-content:space-between; margin-bottom:10px">
+            <span>${item.title}</span>
+            <span>${item.price} د.ت</span>
+        </div>`;
+    });
+
+    totalDiv.innerText = `الإجمالي: ${total} د.ت`;
+    count.innerText = cart.length;
+}
+
+function sendToWhatsApp(){
+    if(cart.length === 0) return alert("السلة فارغة");
+    let msg = "طلب جديد من Bi One Al:%0A";
+    cart.forEach(item => msg += `- ${item.title} (${item.price} د.ت)%0A`);
+    window.open(`https://wa.me/21694622377?text=${msg}`);
+}
+
+function openForm(){ document.getElementById("formOverlay").style.display="flex"; }
+function closeForm(){ document.getElementById("formOverlay").style.display="none"; }
+function toggleCart(){ document.getElementById("cartSidebar").classList.toggle("open"); }
 
 render();
-
 </script>
 
 </body>
