@@ -51,6 +51,19 @@
 
 <section id="projects">
   <h2>مشاريعي</h2>
+
+  <button onclick="openForm()" class="btn">➕ إضافة مشروع</button>
+
+  <div id="projectForm" style="display:none;margin-top:20px;">
+    <input type="file" id="imageInput" accept="image/*"><br><br>
+    <input type="text" id="titleInput" placeholder="اسم المشروع"><br><br>
+    <textarea id="descInput" placeholder="وصف المشروع"></textarea><br><br>
+    <button onclick="saveProject()" class="btn">حفظ</button>
+  </div>
+
+  <div class="cards" id="projectsContainer"></div>
+</section>
+  <h2>مشاريعي</h2>
   <div class="cards">
     <div class="card">
       <h3>مشروع 1</h3>
