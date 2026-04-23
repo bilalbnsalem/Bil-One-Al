@@ -1,185 +1,236 @@
-gap:15px;
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>متجري الذكي</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&display=swap" rel="stylesheet">
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Cairo',sans-serif}
+
+body{
+  color:#e2e8f0;
+  overflow-x:hidden;
+
+  /* 🎨 خلفية متجر حديثة */
+  background: linear-gradient(135deg, #0f172a, #1e293b, #0b1220);
+  background-size:400% 400%;
+  animation:bgmove 12s ease infinite;
 }
 
-/* WHATSAPP */
+@keyframes bgmove{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+/* تأثيرات خلفية */
+body::before,
+body::after{
+  content:"";
+  position:fixed;
+  width:400px;
+  height:400px;
+  border-radius:50%;
+  filter:blur(120px);
+  opacity:0.4;
+  z-index:-1;
+  animation:move 10s infinite alternate;
+}
+
+body::before{background:#38bdf8;top:-100px;left:-100px;}
+body::after{background:#a855f7;bottom:-120px;right:-120px;}
+
+@keyframes move{
+  0%{transform:translate(0,0)}
+  100%{transform:translate(80px,60px)}
+}
+
+/* HEADER */
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:18px 10%;
+  background:#0b1220cc;
+  backdrop-filter:blur(10px);
+  position:sticky;
+  top:0;
+}
+
+header h1{
+  color:#38bdf8;
+  font-size:22px;
+}
+
+/* HERO */
+.hero{
+  text-align:center;
+  padding:60px 20px;
+}
+
+.hero-image{
+  width:320px;
+  max-width:90%;
+  border-radius:24px;
+  box-shadow:0 20px 60px rgba(0,0,0,0.5);
+  animation:float 4s ease-in-out infinite;
+  margin-bottom:20px;
+}
+
+@keyframes float{
+  0%{transform:translateY(0)}
+  50%{transform:translateY(-15px)}
+  100%{transform:translateY(0)}
+}
+
+.hero h2{
+  font-size:22px;
+  max-width:700px;
+  margin:auto;
+  color:#e2e8f0;
+}
+
+/* BUTTON */
+.btn{
+  background:#38bdf8;
+  padding:10px 15px;
+  border:none;
+  border-radius:8px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+/* PRODUCTS */
+.cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:20px;
+  padding:40px 10%;
+}
+
+.card{
+  background:#1e293b;
+  padding:15px;
+  border-radius:12px;
+}
+
+.card img{
+  width:100%;
+  height:180px;
+  object-fit:cover;
+  border-radius:10px;
+}
+
+/* CART */
+.cart-btn{
+  position:fixed;
+  top:15px;
+  left:15px;
+  background:#38bdf8;
+  color:black;
+  padding:10px 14px;
+  border-radius:50px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.cart{
+  position:fixed;
+  top:0;
+  right:-350px;
+  width:300px;
+  height:100%;
+  background:#0b1220;
+  padding:20px;
+  transition:0.3s;
+}
+
+.cart.open{right:0}
+
+/* WHATSAPP MODERN */
 .whatsapp{
   position:fixed;
   bottom:20px;
   left:20px;
   width:60px;
   height:60px;
-  background:#25D366;
-  color:white;
+  background:linear-gradient(135deg,#25D366,#1ebe5d);
   border-radius:50%;
   display:flex;
   justify-content:center;
   align-items:center;
   font-size:26px;
+  color:white;
   text-decoration:none;
+  box-shadow:0 10px 30px rgba(0,0,0,0.4);
 }
 </style>
 </head>
 
 <body>
 
-<!-- LOGIN -->
-<div id="login">
-  <div class="box">
-    <h3>تسجيل دخول</h3>
-    <input id="u" placeholder="admin">
-    <input id="p" type="password" placeholder="1234">
-    <button onclick="login()">دخول</button>
-  </div>
+<header>
+  <h1>متجري الذكي</h1>
+  <button class="btn" onclick="openForm()">➕ إضافة منتج</button>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+
+  <!-- صورة جديدة احترافية -->
+  <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30" class="hero-image">
+
+  <!-- العبارة الجديدة -->
+  <h2>
+    متجر ذكي يجمع بين البساطة في التسوق، الدقة في الاختيار، والسرعة في التوصيل. نحن هنا لنقدم لك تجربة شراء استثنائية.
+  </h2>
 </div>
 
-<!-- APP -->
-<div id="app">
+<!-- CART -->
+<div class="cart-btn" onclick="toggleCart()">🛒 السلة (<span id="count">0</span>)</div>
 
-<div class="sidebar">
-  <h2>Shopify</h2>
-  <button onclick="show('dash')">Dashboard</button>
-  <button onclick="show('products')">Products</button>
-  <button onclick="show('orders')">Orders</button>
-</div>
-
-<div class="content">
-
-<!-- DASH -->
-<div id="dash">
-  <h2>Dashboard</h2>
-  <div class="grid">
-    <div class="card">Products: <span id="pc">0</span></div>
-    <div class="card">Orders: <span id="oc">0</span></div>
-  </div>
+<div class="cart" id="cart">
+  <h3>سلة المشتريات</h3>
+  <div id="cartItems"></div>
 </div>
 
 <!-- PRODUCTS -->
-<div id="products" style="display:none">
-  <h2>Products</h2>
+<div class="cards" id="products"></div>
 
-  <input id="title" placeholder="name">
-  <textarea id="desc" placeholder="desc"></textarea>
-  <input id="price" placeholder="price">
-  <input type="file" id="images" multiple>
-  <button onclick="add()">Add</button>
-
-  <div id="plist"></div>
-</div>
-
-<!-- ORDERS -->
-<div id="orders" style="display:none">
-  <h2>Orders</h2>
-  <div id="olist"></div>
-</div>
-
-</div>
-</div>
-
-<a class="whatsapp" href="https://wa.me/21694622377">💬</a>
+<!-- WHATSAPP -->
+<a class="whatsapp" href="https://wa.me/21694622377" target="_blank">💬</a>
 
 <script>
 
-/* =========================
-   SAFE STORAGE SYSTEM
-========================= */
-
-/* 🔥 MIGRATION (يحافظ على البيانات القديمة) */
-function migrate(){
-  if(!localStorage.getItem("shop_data_migrated")){
-    
-    let old = localStorage.getItem("p");
-    if(old){
-      localStorage.setItem("products", old);
-    }
-
-    let oldO = localStorage.getItem("o");
-    if(oldO){
-      localStorage.setItem("orders", oldO);
-    }
-
-    localStorage.setItem("shop_data_migrated","true");
-  }
-}
-
-migrate();
-
-/* LOAD SAFE DATA */
 let products = JSON.parse(localStorage.getItem("products")||"[]");
-let orders = JSON.parse(localStorage.getItem("orders")||"[]");
+let cart = JSON.parse(localStorage.getItem("cart")||"[]");
 
-/* LOGIN */
-function login(){
-  if(u.value==="admin" && p.value==="1234"){
-    login.style.display="none";
-    app.style.display="block";
-    render();
-  }else alert("error");
-}
-
-/* NAV */
-function show(x){
-  dash.style.display="none";
-  products.style.display="none";
-  orders.style.display="none";
-  document.getElementById(x).style.display="block";
-}
-
-/* ADD PRODUCT */
-function add(){
-  let files=images.files;
-  let imgs=[];
-  let c=0;
-
-  for(let f of files){
-    let r=new FileReader();
-    r.onload=()=>{
-      imgs.push(r.result);
-      c++;
-      if(c===files.length){
-
-        products.push({
-          title:title.value,
-          desc:desc.value,
-          price:price.value,
-          images:imgs
-        });
-
-        localStorage.setItem("products",JSON.stringify(products));
-        render();
-      }
-    }
-    r.readAsDataURL(f);
-  }
-}
-
-/* RENDER */
 function render(){
+  let box=document.getElementById("products");
+  box.innerHTML="";
 
-  plist.innerHTML="";
   products.forEach((p,i)=>{
-    plist.innerHTML+=`
-      <div class="card">
-        <b>${p.title}</b><br>
-        ${p.price}
-        <button onclick="del(${i})">delete</button>
-      </div>
-    `;
+    box.innerHTML+=`
+    <div class="card">
+      <img src="${p.images ? p.images[0] : ''}">
+      <h3>${p.title || "منتج"}</h3>
+      <p>${p.desc || ""}</p>
+      <button class="btn" onclick="add(${i})">أضف للسلة</button>
+    </div>`;
   });
-
-  olist.innerHTML="";
-  orders.forEach(o=>{
-    olist.innerHTML+=`<div class="card">${o}</div>`;
-  });
-
-  pc.innerText=products.length;
-  oc.innerText=orders.length;
 }
 
-/* DELETE */
-function del(i){
-  products.splice(i,1);
-  localStorage.setItem("products",JSON.stringify(products));
-  render();
+function add(i){
+  cart.push(products[i]);
+  localStorage.setItem("cart",JSON.stringify(cart));
+  document.getElementById("count").innerText=cart.length;
+}
+
+function toggleCart(){
+  document.getElementById("cart").classList.toggle("open");
 }
 
 render();
