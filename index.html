@@ -1,307 +1,271 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Bil One Al Shop</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shopify Upgrade Safe</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:'Cairo',sans-serif}
-
 body{
-  color:#e2e8f0;
-  background: radial-gradient(circle at top, #1b2a4a, #0f172a 40%, #050814);
-  overflow-x:hidden;
+  margin:0;
+  font-family:Arial;
+  background:#0f172a;
+  color:white;
 }
 
-/* خلفية */
-body::before,
-body::after{
-  content:"";
-  position:fixed;
-  width:400px;
-  height:400px;
-  border-radius:50%;
-  filter: blur(120px);
-  opacity:0.4;
-  z-index:-1;
-  animation: move 12s infinite alternate;
+/* LOGIN */
+#login{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
 }
-body::before{background:#38bdf8;top:-100px;left:-100px;}
-body::after{background:#a855f7;bottom:-120px;right:-120px;}
-
-@keyframes move{
-  0%{transform:translate(0,0)}
-  100%{transform:translate(80px,60px)}
+.box{
+  background:#1e293b;
+  padding:20px;
+  border-radius:10px;
+  width:300px;
 }
-
-/* header */
-header{
-  display:flex;justify-content:space-between;align-items:center;
-  padding:15px 10%;
-  background:#0b1220cc;
-  backdrop-filter:blur(10px);
-  position:sticky;top:0;
-  z-index:10;
-}
-
-header h1{color:#38bdf8}
-
-/* HERO */
-.hero{
-  text-align:center;
-  padding:60px 20px;
-}
-
-.hero h2{
-  font-size:28px;
-  margin:20px 0;
-}
-
-/* BUTTON */
-.btn{
-  background:#38bdf8;
-  padding:10px 15px;
+input,textarea{
+  width:100%;
+  padding:10px;
+  margin:5px 0;
   border:none;
-  border-radius:8px;
-  cursor:pointer;
-  color:#000;
+  border-radius:6px;
+}
+
+button{
+  padding:10px;
+  background:#38bdf8;
+  border:none;
+  border-radius:6px;
   font-weight:bold;
+  cursor:pointer;
 }
 
-/* PRODUCTS */
-.cards{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:20px;
-  padding:40px 10%;
+/* APP */
+#app{display:none}
+
+/* SIDEBAR */
+.sidebar{
+  position:fixed;
+  right:0;
+  top:0;
+  width:220px;
+  height:100vh;
+  background:#0b1220;
+  padding:15px;
+}
+.sidebar h2{color:#38bdf8}
+.sidebar button{
+  width:100%;
+  margin:5px 0;
+  background:#1e293b;
+  color:white;
 }
 
+/* CONTENT */
+.content{
+  margin-right:240px;
+  padding:20px;
+}
+
+/* CARDS */
 .card{
   background:#1e293b;
-  padding:15px;
-  border-radius:12px;
-}
-
-.card img{
-  width:100%;
-  height:180px;
-  object-fit:cover;
+  padding:10px;
+  margin:10px 0;
   border-radius:10px;
 }
 
-/* cart button */
-.cart-btn{
-  position:fixed;
-  top:20px;
-  left:20px;
-  background:#38bdf8;
-  color:#000;
-  padding:10px 14px;
-  border-radius:50px;
-  cursor:pointer;
-  font-weight:bold;
-  z-index:20;
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:15px;
 }
 
-/* CART PANEL */
-.cart{
-  position:fixed;
-  top:0;
-  right:-400px;
-  width:320px;
-  height:100%;
-  background:#0b1220;
-  padding:20px;
-  transition:0.3s;
-  z-index:999;
-  overflow-y:auto;
-}
-
-.cart.open{right:0}
-
-.cart h3{margin-bottom:15px}
-
-.cart-item{
-  background:#1e293b;
-  padding:10px;
-  margin-bottom:10px;
-  border-radius:8px;
-}
-
-/* whatsapp modern */
-.whatsapp-float{
+/* WHATSAPP */
+.whatsapp{
   position:fixed;
   bottom:20px;
   left:20px;
-  background:linear-gradient(135deg,#25D366,#1ebe5d);
-  color:white;
   width:60px;
   height:60px;
+  background:#25D366;
+  color:white;
   border-radius:50%;
   display:flex;
-  align-items:center;
   justify-content:center;
+  align-items:center;
   font-size:26px;
-  box-shadow:0 10px 30px rgba(0,0,0,0.4);
   text-decoration:none;
 }
-
-/* popup */
-.popup{
-  display:none;
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,0.7);
-  justify-content:center;
-  align-items:center;
-}
-
-.popup-content{
-  background:#1e293b;
-  padding:20px;
-  width:90%;
-  max-width:400px;
-  border-radius:12px;
-}
-
-.popup-content input,
-.popup-content textarea{
-  width:100%;
-  margin-bottom:10px;
-  padding:10px;
-  border:none;
-  border-radius:8px;
-}
-
 </style>
 </head>
 
 <body>
 
-<header>
-  <h1>Bil One Al</h1>
-  <button class="btn" onclick="openForm()">➕ منتج</button>
-</header>
-
-<!-- HERO -->
-<div class="hero">
-  <h2>بساطة في التسوق دقة في الاختيار وسرعة في التوصيل نحن هنا لخدمتكم</h2>
-</div>
-
-<!-- CART BUTTON -->
-<div class="cart-btn" onclick="toggleCart()">🛒 السلة (<span id="count">0</span>)</div>
-
-<!-- CART PANEL -->
-<div class="cart" id="cart">
-  <h3>سلة المشتريات</h3>
-  <div id="cartItems"></div>
-</div>
-
-<!-- PRODUCTS -->
-<div class="cards" id="products"></div>
-
-<!-- POPUP -->
-<div class="popup" id="popup">
-  <div class="popup-content">
-    <h3>إضافة منتج</h3>
-    <input type="text" id="title" placeholder="اسم المنتج">
-    <textarea id="desc" placeholder="الوصف"></textarea>
-    <input type="file" id="images" multiple>
-    <button class="btn" onclick="save()">حفظ</button>
+<!-- LOGIN -->
+<div id="login">
+  <div class="box">
+    <h3>تسجيل دخول</h3>
+    <input id="u" placeholder="admin">
+    <input id="p" type="password" placeholder="1234">
+    <button onclick="login()">دخول</button>
   </div>
 </div>
 
-<!-- WHATSAPP -->
-<a class="whatsapp-float" href="https://wa.me/21694622377" target="_blank">💬</a>
+<!-- APP -->
+<div id="app">
+
+<div class="sidebar">
+  <h2>Shopify</h2>
+  <button onclick="show('dash')">Dashboard</button>
+  <button onclick="show('products')">Products</button>
+  <button onclick="show('orders')">Orders</button>
+</div>
+
+<div class="content">
+
+<!-- DASH -->
+<div id="dash">
+  <h2>Dashboard</h2>
+  <div class="grid">
+    <div class="card">Products: <span id="pc">0</span></div>
+    <div class="card">Orders: <span id="oc">0</span></div>
+  </div>
+</div>
+
+<!-- PRODUCTS -->
+<div id="products" style="display:none">
+  <h2>Products</h2>
+
+  <input id="title" placeholder="name">
+  <textarea id="desc" placeholder="desc"></textarea>
+  <input id="price" placeholder="price">
+  <input type="file" id="images" multiple>
+  <button onclick="add()">Add</button>
+
+  <div id="plist"></div>
+</div>
+
+<!-- ORDERS -->
+<div id="orders" style="display:none">
+  <h2>Orders</h2>
+  <div id="olist"></div>
+</div>
+
+</div>
+</div>
+
+<a class="whatsapp" href="https://wa.me/21694622377">💬</a>
 
 <script>
 
-let products = JSON.parse(localStorage.getItem("products")||"[]");
-let cart = JSON.parse(localStorage.getItem("cart")||"[]");
+/* =========================
+   SAFE STORAGE SYSTEM
+========================= */
 
-/* render products */
-function render(){
-  let box=document.getElementById("products");
-  box.innerHTML="";
+/* 🔥 MIGRATION (يحافظ على البيانات القديمة) */
+function migrate(){
+  if(!localStorage.getItem("shop_data_migrated")){
+    
+    let old = localStorage.getItem("p");
+    if(old){
+      localStorage.setItem("products", old);
+    }
 
-  products.forEach((p,i)=>{
-    box.innerHTML+=`
-    <div class="card">
-      <img src="${p.images[0]}">
-      <h3>${p.title}</h3>
-      <p>${p.desc}</p>
-      <button class="btn" onclick="add(${i})">أضف للسلة</button>
-    </div>`;
-  });
+    let oldO = localStorage.getItem("o");
+    if(oldO){
+      localStorage.setItem("orders", oldO);
+    }
+
+    localStorage.setItem("shop_data_migrated","true");
+  }
 }
 
-/* save product */
-function save(){
-  let files=document.getElementById("images").files;
-  let arr=[];
+migrate();
 
-  let count=0;
+/* LOAD SAFE DATA */
+let products = JSON.parse(localStorage.getItem("products")||"[]");
+let orders = JSON.parse(localStorage.getItem("orders")||"[]");
+
+/* LOGIN */
+function login(){
+  if(u.value==="admin" && p.value==="1234"){
+    login.style.display="none";
+    app.style.display="block";
+    render();
+  }else alert("error");
+}
+
+/* NAV */
+function show(x){
+  dash.style.display="none";
+  products.style.display="none";
+  orders.style.display="none";
+  document.getElementById(x).style.display="block";
+}
+
+/* ADD PRODUCT */
+function add(){
+  let files=images.files;
+  let imgs=[];
+  let c=0;
 
   for(let f of files){
     let r=new FileReader();
     r.onload=()=>{
-      arr.push(r.result);
-      count++;
-      if(count===files.length){
+      imgs.push(r.result);
+      c++;
+      if(c===files.length){
+
         products.push({
           title:title.value,
           desc:desc.value,
-          images:arr
+          price:price.value,
+          images:imgs
         });
 
         localStorage.setItem("products",JSON.stringify(products));
         render();
-        closeForm();
       }
     }
     r.readAsDataURL(f);
   }
 }
 
-/* cart */
-function add(i){
-  cart.push(products[i]);
-  localStorage.setItem("cart",JSON.stringify(cart));
-  updateCart();
-}
+/* RENDER */
+function render(){
 
-function updateCart(){
-  document.getElementById("count").innerText=cart.length;
-
-  let box=document.getElementById("cartItems");
-  box.innerHTML="";
-
-  cart.forEach((c,i)=>{
-    box.innerHTML+=`
-    <div class="cart-item">
-      <p>${c.title}</p>
-    </div>`;
+  plist.innerHTML="";
+  products.forEach((p,i)=>{
+    plist.innerHTML+=`
+      <div class="card">
+        <b>${p.title}</b><br>
+        ${p.price}
+        <button onclick="del(${i})">delete</button>
+      </div>
+    `;
   });
+
+  olist.innerHTML="";
+  orders.forEach(o=>{
+    olist.innerHTML+=`<div class="card">${o}</div>`;
+  });
+
+  pc.innerText=products.length;
+  oc.innerText=orders.length;
 }
 
-/* toggle cart */
-function toggleCart(){
-  document.getElementById("cart").classList.toggle("open");
-}
-
-/* popup */
-function openForm(){
-  popup.style.display="flex"
-}
-function closeForm(){
-  popup.style.display="none"
+/* DELETE */
+function del(i){
+  products.splice(i,1);
+  localStorage.setItem("products",JSON.stringify(products));
+  render();
 }
 
 render();
-updateCart();
 
 </script>
 
