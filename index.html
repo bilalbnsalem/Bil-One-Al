@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Bil One Al</title>
+<title>Bil One Al Shop</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&display=swap" rel="stylesheet">
 
@@ -12,9 +12,8 @@
 
 body{
   color:#e2e8f0;
-  line-height:1.7;
-  overflow-x:hidden;
   background: radial-gradient(circle at top, #1b2a4a, #0f172a 40%, #050814);
+  overflow-x:hidden;
 }
 
 /* خلفية */
@@ -28,9 +27,8 @@ body::after{
   filter: blur(120px);
   opacity:0.4;
   z-index:-1;
-  animation: move 12s infinite alternate ease-in-out;
+  animation: move 12s infinite alternate;
 }
-
 body::before{background:#38bdf8;top:-100px;left:-100px;}
 body::after{background:#a855f7;bottom:-120px;right:-120px;}
 
@@ -39,71 +37,46 @@ body::after{background:#a855f7;bottom:-120px;right:-120px;}
   100%{transform:translate(80px,60px)}
 }
 
+/* header */
 header{
   display:flex;justify-content:space-between;align-items:center;
-  padding:20px 10%;background:#0b1220cc;
-  backdrop-filter: blur(10px);
-  position:sticky;top:0;z-index:10
+  padding:15px 10%;
+  background:#0b1220cc;
+  backdrop-filter:blur(10px);
+  position:sticky;top:0;
+  z-index:10;
 }
 
 header h1{color:#38bdf8}
-nav a{color:#e2e8f0;margin:0 10px;text-decoration:none}
-nav a:hover{color:#38bdf8}
 
 /* HERO */
 .hero{
-  min-height:92vh;
-  display:flex;flex-direction:column;justify-content:center;align-items:center;
-  text-align:center;padding:40px 20px;
+  text-align:center;
+  padding:60px 20px;
 }
 
-.hero-image{
-  width:340px;
-  max-width:90%;
-  margin-bottom:25px;
-  border-radius:24px;
-  box-shadow:0 20px 60px rgba(0,0,0,0.6);
-  animation: float 4s ease-in-out infinite;
+.hero h2{
+  font-size:28px;
+  margin:20px 0;
 }
 
-@keyframes float{
-  0%{transform:translateY(0)}
-  50%{transform:translateY(-15px)}
-  100%{transform:translateY(0)}
-}
-
-.hero-badge{
-  background:#1e293b;
-  border:1px solid #334155;
-  color:#38bdf8;
-  padding:8px 14px;
-  border-radius:999px;
-  margin-bottom:18px;
-  font-size:14px
-}
-
-.hero h2{font-size:32px;margin-bottom:14px}
-.hero h2 span{color:#38bdf8}
-
-/* زر واتساب */
-.whatsapp{
-  display:inline-block;
-  margin-top:20px;
-  background:#25D366;
-  color:#fff;
-  padding:12px 18px;
+/* BUTTON */
+.btn{
+  background:#38bdf8;
+  padding:10px 15px;
+  border:none;
   border-radius:8px;
-  text-decoration:none;
+  cursor:pointer;
+  color:#000;
   font-weight:bold;
 }
 
-/* المنتجات */
-section{padding:80px 10%}
-
+/* PRODUCTS */
 .cards{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
   gap:20px;
+  padding:40px 10%;
 }
 
 .card{
@@ -112,39 +85,96 @@ section{padding:80px 10%}
   border-radius:12px;
 }
 
-/* سلايدر الصور داخل المنتج */
-.slider{
-  position:relative;
+.card img{
   width:100%;
-  height:200px;
-  overflow:hidden;
+  height:180px;
+  object-fit:cover;
   border-radius:10px;
 }
 
-.slider img{
-  width:100%;
-  height:200px;
-  object-fit:cover;
-  display:none;
-}
-
-.slider img.active{
-  display:block;
-}
-
-.slider button{
-  position:absolute;
-  top:50%;
-  transform:translateY(-50%);
-  background:rgba(0,0,0,0.5);
-  color:white;
-  border:none;
+/* cart button */
+.cart-btn{
+  position:fixed;
+  top:20px;
+  left:20px;
+  background:#38bdf8;
+  color:#000;
+  padding:10px 14px;
+  border-radius:50px;
   cursor:pointer;
-  padding:5px 10px;
+  font-weight:bold;
+  z-index:20;
 }
 
-.prev{left:5px}
-.next{right:5px}
+/* CART PANEL */
+.cart{
+  position:fixed;
+  top:0;
+  right:-400px;
+  width:320px;
+  height:100%;
+  background:#0b1220;
+  padding:20px;
+  transition:0.3s;
+  z-index:999;
+  overflow-y:auto;
+}
+
+.cart.open{right:0}
+
+.cart h3{margin-bottom:15px}
+
+.cart-item{
+  background:#1e293b;
+  padding:10px;
+  margin-bottom:10px;
+  border-radius:8px;
+}
+
+/* whatsapp modern */
+.whatsapp-float{
+  position:fixed;
+  bottom:20px;
+  left:20px;
+  background:linear-gradient(135deg,#25D366,#1ebe5d);
+  color:white;
+  width:60px;
+  height:60px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:26px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.4);
+  text-decoration:none;
+}
+
+/* popup */
+.popup{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.7);
+  justify-content:center;
+  align-items:center;
+}
+
+.popup-content{
+  background:#1e293b;
+  padding:20px;
+  width:90%;
+  max-width:400px;
+  border-radius:12px;
+}
+
+.popup-content input,
+.popup-content textarea{
+  width:100%;
+  margin-bottom:10px;
+  padding:10px;
+  border:none;
+  border-radius:8px;
+}
 
 </style>
 </head>
@@ -153,84 +183,126 @@ section{padding:80px 10%}
 
 <header>
   <h1>Bil One Al</h1>
+  <button class="btn" onclick="openForm()">➕ منتج</button>
 </header>
 
 <!-- HERO -->
 <div class="hero">
-
-  <img src="file_00000000ac3c71f7a1b105db20571fdc.png" class="hero-image">
-
-  <div class="hero-badge">BI ONE AL • Shop</div>
-
-  <!-- النص الجديد -->
-  <h2>
-    بساطة في التسوق دقة في الاختيار وسرعة في التوصيل نحن هنا لخدمتكم
-  </h2>
-
-  <a class="whatsapp" href="https://wa.me/21694622377" target="_blank">
-    📱 تواصل واتساب
-  </a>
+  <h2>بساطة في التسوق دقة في الاختيار وسرعة في التوصيل نحن هنا لخدمتكم</h2>
 </div>
 
-<!-- المنتجات (بدون كلمة "مشاريعي") -->
-<section>
+<!-- CART BUTTON -->
+<div class="cart-btn" onclick="toggleCart()">🛒 السلة (<span id="count">0</span>)</div>
 
-  <div class="cards" id="products"></div>
+<!-- CART PANEL -->
+<div class="cart" id="cart">
+  <h3>سلة المشتريات</h3>
+  <div id="cartItems"></div>
+</div>
 
-</section>
+<!-- PRODUCTS -->
+<div class="cards" id="products"></div>
+
+<!-- POPUP -->
+<div class="popup" id="popup">
+  <div class="popup-content">
+    <h3>إضافة منتج</h3>
+    <input type="text" id="title" placeholder="اسم المنتج">
+    <textarea id="desc" placeholder="الوصف"></textarea>
+    <input type="file" id="images" multiple>
+    <button class="btn" onclick="save()">حفظ</button>
+  </div>
+</div>
+
+<!-- WHATSAPP -->
+<a class="whatsapp-float" href="https://wa.me/21694622377" target="_blank">💬</a>
 
 <script>
-// منتجات مع عدة صور
-let data = [
-  {
-    title:"منتج 1",
-    desc:"وصف المنتج",
-    images:[
-      "https://picsum.photos/400/300?1",
-      "https://picsum.photos/400/300?2",
-      "https://picsum.photos/400/300?3"
-    ]
-  }
-];
 
+let products = JSON.parse(localStorage.getItem("products")||"[]");
+let cart = JSON.parse(localStorage.getItem("cart")||"[]");
+
+/* render products */
 function render(){
   let box=document.getElementById("products");
   box.innerHTML="";
 
-  data.forEach((p,i)=>{
+  products.forEach((p,i)=>{
     box.innerHTML+=`
     <div class="card">
-
-      <div class="slider" id="slider${i}">
-        ${p.images.map((img,ix)=>`
-          <img src="${img}" class="${ix===0?'active':''}">
-        `).join('')}
-
-        <button class="prev" onclick="change(${i},-1)">‹</button>
-        <button class="next" onclick="change(${i},1)">›</button>
-      </div>
-
+      <img src="${p.images[0]}">
       <h3>${p.title}</h3>
       <p>${p.desc}</p>
-
+      <button class="btn" onclick="add(${i})">أضف للسلة</button>
     </div>`;
   });
 }
 
-function change(i,dir){
-  let slider=document.querySelectorAll(`#slider${i} img`);
-  let index=[...slider].findIndex(img=>img.classList.contains("active"));
+/* save product */
+function save(){
+  let files=document.getElementById("images").files;
+  let arr=[];
 
-  slider[index].classList.remove("active");
+  let count=0;
 
-  index+=dir;
-  if(index<0) index=slider.length-1;
-  if(index>=slider.length) index=0;
+  for(let f of files){
+    let r=new FileReader();
+    r.onload=()=>{
+      arr.push(r.result);
+      count++;
+      if(count===files.length){
+        products.push({
+          title:title.value,
+          desc:desc.value,
+          images:arr
+        });
 
-  slider[index].classList.add("active");
+        localStorage.setItem("products",JSON.stringify(products));
+        render();
+        closeForm();
+      }
+    }
+    r.readAsDataURL(f);
+  }
+}
+
+/* cart */
+function add(i){
+  cart.push(products[i]);
+  localStorage.setItem("cart",JSON.stringify(cart));
+  updateCart();
+}
+
+function updateCart(){
+  document.getElementById("count").innerText=cart.length;
+
+  let box=document.getElementById("cartItems");
+  box.innerHTML="";
+
+  cart.forEach((c,i)=>{
+    box.innerHTML+=`
+    <div class="cart-item">
+      <p>${c.title}</p>
+    </div>`;
+  });
+}
+
+/* toggle cart */
+function toggleCart(){
+  document.getElementById("cart").classList.toggle("open");
+}
+
+/* popup */
+function openForm(){
+  popup.style.display="flex"
+}
+function closeForm(){
+  popup.style.display="none"
 }
 
 render();
+updateCart();
+
 </script>
 
 </body>
