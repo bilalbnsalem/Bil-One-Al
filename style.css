@@ -1,0 +1,111 @@
+:root {
+    --gold: #c5a059;
+    --gold-gradient: linear-gradient(135deg, #d4af37 0%, #f7e08b 100%);
+    --dark-bg: #111;
+    --text-color: #333;
+}
+
+body {
+    font-family: 'Cairo', sans-serif;
+    margin: 0; padding: 0;
+    background-color: #f9f9f9;
+    color: var(--text-color);
+}
+
+header {
+    background: #fff;
+    text-align: center;
+    padding: 15px;
+    border-bottom: 2px solid var(--gold);
+}
+
+header h1 { margin: 0; color: var(--gold); letter-spacing: 2px; }
+header p { margin: 0; font-size: 12px; font-weight: bold; }
+
+.product-display img {
+    width: 100%;
+    max-height: 500px;
+    object-fit: cover;
+}
+
+.details { padding: 15px; text-align: center; }
+.product-title { text-transform: uppercase; font-size: 20px; margin-bottom: 10px; }
+
+.price-container { margin: 15px 0; }
+.old-price { text-decoration: line-through; color: #999; margin-left: 10px; }
+.new-price { font-size: 28px; font-weight: bold; color: var(--gold); }
+.promo-tag { background: #e74c3c; color: #fff; padding: 3px 8px; border-radius: 5px; font-size: 12px; }
+
+.selection-card {
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.color-options, .size-options {
+    display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;
+}
+
+.color-item, .size-item {
+    border: 1px solid #ddd;
+    padding: 8px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.color-item.active, .size-item.active {
+    border-color: var(--gold);
+    background-color: #fff9e6;
+    box-shadow: 0 0 5px var(--gold);
+}
+
+.trust-box {
+    background: var(--gold-gradient);
+    border-radius: 15px;
+    padding: 20px;
+    color: #fff;
+    margin: 20px 0;
+}
+
+.features {
+    display: flex; justify-content: space-between; margin-top: 15px;
+}
+
+.feature-item {
+    background: rgba(255,255,255,0.9);
+    color: #333;
+    font-size: 10px;
+    padding: 10px 5px;
+    border-radius: 10px;
+    flex: 1;
+    margin: 0 3px;
+}
+
+.order-form input, .order-form select, .order-form textarea {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+.buy-now-btn {
+    background: var(--gold-gradient);
+    border: none;
+    width: 100%;
+    padding: 15px;
+    border-radius: 30px;
+    color: #000;
+    font-weight: bold;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(197, 160, 89, 0.4);
+}
+
+.wa-float {
+    position: fixed; bottom: 20px; right: 20px; width: 60px; z-index: 100;
+  }
