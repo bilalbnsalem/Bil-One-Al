@@ -1,115 +1,244 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bil-One-Al Store | متجر بيل وان ال</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <title>Bil-One-Al | Boutique</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        /* إعدادات عامة - النمط البسيط (Minimalist) */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: #ffffff;
+            color: #000000;
+            line-height: 1.6;
+            padding-bottom: 80px; /* مساحة للزر الثابت في الأسفل */
+        }
+
+        /* الهيدر */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            border-bottom: 1px solid #f0f0f0;
+            position: sticky;
+            top: 0;
+            background: white;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 20px;
+            letter-spacing: -1px;
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .cart-icon {
+            position: relative;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -10px;
+            background: #000;
+            color: #fff;
+            font-size: 10px;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* معرض الصور */
+        .gallery-container {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .main-image {
+            width: 100%;
+            background: #f9f9f9;
+            display: block;
+        }
+
+        .thumbnails {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            padding: 15px;
+        }
+
+        .thumb {
+            width: 70px;
+            height: 70px;
+            border: 1px solid #eee;
+            cursor: pointer;
+            object-fit: cover;
+        }
+
+        .thumb.active {
+            border: 2px solid #000;
+        }
+
+        /* تفاصيل المنتج */
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-transform: capitalize;
+        }
+
+        .price-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .current-price {
+            color: #e60000; /* أحمر بارز */
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        .old-price {
+            color: #999;
+            text-decoration: line-through;
+            font-size: 16px;
+        }
+
+        .discount-tag {
+            background: #fdf0f0;
+            color: #e60000;
+            padding: 2px 8px;
+            border: 1px solid #e60000;
+            font-size: 14px;
+            font-weight: bold;
+            border-radius: 4px;
+        }
+
+        /* زر الشراء الثابت (Sticky CTA) */
+        .footer-cta {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 15px;
+            background: white;
+            box-shadow: 0 -5px 15px rgba(0,0,0,0.05);
+            z-index: 2000;
+        }
+
+        .buy-button {
+            display: block;
+            width: 100%;
+            background: #000000;
+            color: #ffffff;
+            text-align: center;
+            padding: 18px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        .buy-button:active {
+            transform: scale(0.98);
+            background: #333;
+        }
+
+        /* تحسينات للجوال (Mobile First) */
+        @media (min-width: 768px) {
+            .container {
+                display: flex;
+                max-width: 1000px;
+                margin: 0 auto;
+                align-items: flex-start;
+                padding-top: 40px;
+            }
+            .gallery-container, .product-info {
+                flex: 1;
+            }
+        }
+    </style>
 </head>
 <body>
 
-    <!-- Header -->
     <header>
-        <div class="logo">
-            <!-- يمكنك وضع رابط صورتك هنا -->
-            <h1>Bil-One-Al</h1>
-            <p>STORE</p>
+        <div class="logo">Bil-One-Al</div>
+        <div class="nav-icons">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <div class="cart-icon">
+                <i class="fa-solid fa-bag-shopping"></i>
+                <span class="cart-count">0</span>
+            </div>
         </div>
     </header>
 
-    <main>
-        <!-- Product Images -->
-        <section class="product-display">
-            <div class="main-image-container">
-                <img id="main-img" src="https://via.placeholder.com/500x600?text=Product+Image" alt="Product">
+    <div class="container">
+        <div class="gallery-container">
+            <img src="https://via.placeholder.com/600x600/f9f9f9/000000?text=Produit+Principal" alt="Produit" class="main-image" id="mainImg">
+            <div class="thumbnails">
+                <img src="https://via.placeholder.com/100" class="thumb active" onclick="changeImage(this.src, this)">
+                <img src="https://via.placeholder.com/100/000000/FFFFFF?text=Noir" class="thumb" onclick="changeImage(this.src, this)">
+                <img src="https://via.placeholder.com/100/EEEEEE/000000?text=Angle" class="thumb" onclick="changeImage(this.src, this)">
             </div>
-        </section>
+        </div>
 
-        <!-- Product Details -->
-        <section class="details">
-            <h2 class="product-title">pull homme uni 119</h2>
+        <div class="product-info">
+            <h1 class="product-title">Basket Premium LC Hommes</h1>
+            
             <div class="price-container">
-                <span class="old-price">33 DT</span>
-                <span class="new-price">30 DT</span>
-                <span class="promo-tag">PROMO 🔥</span>
+                <span class="current-price">110.00 DT</span>
+                <span class="old-price">199.00 DT</span>
+                <span class="discount-tag">-45%</span>
             </div>
 
-            <!-- Color Selection -->
-            <div class="selection-card">
-                <h4 class="selection-title">🎨 اختر اللون / CHOISIR LA COULEUR :</h4>
-                <div class="color-options" id="color-list">
-                    <div class="color-item active" onclick="selectColor('أبيض (Blanc)', 'https://via.placeholder.com/500x600?text=White+Shirt', this)">
-                        <span>Blanc</span>
-                    </div>
-                    <div class="color-item" onclick="selectColor('أسود (Noir)', 'https://via.placeholder.com/500x600?text=Black+Shirt', this)">
-                        <span>Noir</span>
-                    </div>
-                    <div class="color-item" onclick="selectColor('أزرق (Bleu)', 'https://via.placeholder.com/500x600?text=Blue+Shirt', this)">
-                        <span>Bleu</span>
-                    </div>
-                </div>
-            </div>
+            <p style="color: #666; font-size: 14px; margin-bottom: 20px;">
+                Livraison gratuite sur toute la Tunisie. Qualité garantie par Bil-One-Al.
+            </p>
+        </div>
+    </div>
 
-            <!-- Size Selection -->
-            <div class="selection-card">
-                <h4 class="selection-title">📏 اختر المقاس / CHOISIR LA TAILLE :</h4>
-                <div class="size-options">
-                    <div class="size-item" onclick="selectSize('M', this)">M</div>
-                    <div class="size-item active" onclick="selectSize('L', this)">L</div>
-                    <div class="size-item" onclick="selectSize('XL', this)">XL</div>
-                    <div class="size-item" onclick="selectSize('XXL', this)">XXL</div>
-                </div>
-            </div>
+    <div class="footer-cta">
+        <a href="https://wa.me/21694622377?text=Bonjour, je souhaite acheter le produit: Basket Premium LC" class="buy-button">
+            ACHETER MAINTENANT
+        </a>
+    </div>
 
-            <!-- Trust Section (مثل الصورة تماماً) -->
-            <div class="trust-box">
-                <div class="check-before-pay">
-                    <span>📍 تجم تحل الكولي قبل ما تخلص</span>
-                    <p>Ouvrez le colis avant de payer ✓</p>
-                </div>
-                <div class="features">
-                    <div class="feature-item">🚚 توصيل سريع <br> 24-48h</div>
-                    <div class="feature-item">💵 الدفع عند الاستلام <br> COD</div>
-                    <div class="feature-item">⭐ جودة مضمونة <br> 100%</div>
-                </div>
-            </div>
+    <script>
+        // وظيفة تبديل الصور
+        function changeImage(src, el) {
+            document.getElementById('mainImg').src = src;
+            let thumbs = document.querySelectorAll('.thumb');
+            thumbs.forEach(t => t.classList.remove('active'));
+            el.classList.add('active');
+        }
+    </script>
 
-            <!-- Order Form -->
-            <div class="order-form">
-                <h3 class="form-header">📋 أكمل طلبك</h3>
-                <input type="text" id="cust-name" placeholder="* الاسم الكامل" required>
-                <input type="tel" id="cust-phone" placeholder="* رقم الهاتف" required>
-                <select id="cust-state">
-                    <option value="">-- اختر الولاية --</option>
-                    <option value="Tunis">تونس</option>
-                    <option value="Sousse">سوسة</option>
-                    <option value="Sfax">صفاقس</option>
-                    <option value="Nabeul">نابل</option>
-                    <option value="Bizerte">بنزرت</option>
-                    <!-- يمكنك إضافة باقي الولايات -->
-                </select>
-                <textarea id="cust-address" placeholder="* العنوان الكامل"></textarea>
-
-                <div class="invoice">
-                    <div class="inv-row"><span>المنتج:</span> <span>30 DT</span></div>
-                    <div class="inv-row"><span>التوصيل:</span> <span>8 DT</span></div>
-                    <div class="inv-row total"><span>المجموع الكلي:</span> <span>38 DT</span></div>
-                </div>
-
-                <button class="buy-now-btn" onclick="checkout()">
-                    <span>اشتري الآن</span>
-                    <small>ORDER NOW 📞</small>
-                </button>
-            </div>
-        </section>
-    </main>
-
-    <!-- WhatsApp Button -->
-    <a href="https://wa.me/21694622377" class="wa-float" target="_blank">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
-    </a>
-
-    <script src="script.js"></script>
 </body>
 </html>
