@@ -1,305 +1,115 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bil-One-Al | عالم من الخيارات المتعددة</title>
-
-<!-- مكتبات Firebase الأساسية -->
-<script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-firestore-compat.js"></script>
-
-<style>
-:root {
-    --bg-dark: #020617; 
-    --accent-blue: #38bdf8; 
-    --card-bg: rgba(15, 23, 42, 0.9);
-    --whatsapp-green: #25D366;
-}
-
-*{box-sizing:border-box; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin:0; padding:0}
-
-body {
-  color: white;
-  min-height: 100vh;
-  background-color: var(--bg-dark);
-  background-image: 
-    radial-gradient(circle at 10% 20%, rgba(56, 189, 248, 0.1) 0%, transparent 40%),
-    radial-gradient(circle at 90% 80%, rgba(56, 189, 248, 0.05) 0%, transparent 40%),
-    url('https://www.transparenttextures.com/patterns/circuit-board.png'); 
-  background-attachment: fixed;
-  padding-bottom: 100px;
-}
-
-/* 🔝 الهيدر العلوي */
-header {
-  text-align: center;
-  padding: 15px;
-  background: rgba(2, 6, 23, 0.9);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(56, 189, 248, 0.1);
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-}
-
-/* الشعار في الهيدر */
-.header-logo {
-    font-size: 24px;
-    font-weight: 900;
-    color: var(--accent-blue);
-    cursor: pointer;
-    letter-spacing: 1px;
-    user-select: none;
-    text-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
-}
-
-/* 🚀 قسم الواجهة (Hero) */
-.hero {
-    text-align: center;
-    padding: 60px 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.main-logo-box {
-    margin-bottom: 20px;
-}
-
-.main-logo-text {
-    font-size: 60px;
-    font-weight: 900;
-    letter-spacing: -2px;
-    background: linear-gradient(to bottom, #fff 30%, var(--accent-blue));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0 0 15px rgba(56, 189, 248, 0.4));
-}
-
-.slogan {
-    font-size: 22px;
-    color: #f8fafc;
-    margin-top: -10px;
-    font-weight: 300;
-    letter-spacing: 5px;
-}
-
-.description {
-    color: #94a3b8;
-    max-width: 700px;
-    margin-top: 25px;
-    line-height: 1.8;
-    font-size: 17px;
-}
-
-/* 📦 المنتجات */
-.container { padding: 0 5%; max-width: 1300px; margin: auto; }
-.cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 30px;
-}
-
-.card {
-  background: var(--card-bg);
-  border-radius: 15px;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  overflow: hidden;
-  transition: 0.4s;
-  display: flex;
-  flex-direction: column;
-}
-.card:hover { 
-    transform: translateY(-10px); 
-    border-color: var(--accent-blue);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-}
-
-.card img { width: 100%; height: 280px; object-fit: cover; border-bottom: 1px solid rgba(255,255,255,0.05); }
-.card-content { padding: 20px; display: flex; flex-direction: column; gap: 15px; }
-.card h3 { font-size: 20px; color: #fff; }
-.price { font-size: 26px; color: var(--accent-blue); font-weight: 800; }
-
-/* 🟩 زر الواتساب المستطيل */
-.ws-btn {
-    background: var(--whatsapp-green);
-    color: white;
-    text-decoration: none;
-    padding: 15px;
-    text-align: center;
-    border-radius: 6px; /* مستطيل */
-    font-weight: bold;
-    font-size: 16px;
-    transition: 0.3s;
-    display: block;
-}
-.ws-btn:hover { background: #1eb954; }
-
-/* 🔒 أزرار الإدارة (مخفية للزوار) */
-#adminAddBtn, .del-btn { display: none; }
-.admin-mode #adminAddBtn { display: flex; }
-.admin-mode .del-btn { display: block; }
-
-.fixed-add-btn {
-    position: fixed;
-    bottom: 30px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: var(--accent-blue);
-    color: black;
-    padding: 16px 45px;
-    border-radius: 50px;
-    font-weight: bold;
-    border: none;
-    cursor: pointer;
-    z-index: 2000;
-    box-shadow: 0 0 25px rgba(56, 189, 248, 0.5);
-}
-
-.del-btn {
-    background: #ef4444; color: white; border: none;
-    padding: 8px; border-radius: 4px; cursor: pointer;
-    font-size: 12px; margin-top: 5px;
-}
-
-/* نافذة الإضافة */
-.modal {
-    display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95);
-    justify-content: center; align-items: center; z-index: 3000;
-}
-.modal-box { background: #1e293b; padding: 30px; border-radius: 15px; width: 90%; max-width: 400px; border: 1px solid var(--accent-blue); }
-input, textarea { width: 100%; padding: 12px; margin: 10px 0; background: #020617; color: white; border: 1px solid #334155; border-radius: 6px; }
-
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bil-One-Al Store | متجر بيل وان ال</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<header>
-    <div class="header-logo" id="logoSecret">BIL-ONE-AL</div>
-</header>
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <!-- يمكنك وضع رابط صورتك هنا -->
+            <h1>Bil-One-Al</h1>
+            <p>STORE</p>
+        </div>
+    </header>
 
-<div class="hero">
-    <div class="main-logo-box">
-        <h1 class="main-logo-text">Bil-One-Al</h1>
-        <div class="slogan">عالم من الخيارات المتعددة</div>
-    </div>
-    <p class="description">
-        وجهتك الشاملة لكل ما تبحث عنه؛ من أثاث المنزل الفاخر والأجهزة الإلكترونية الحديثة إلى أرقى الملابس والأحذية. 
-        نجمع لك الجودة والتنوع لتجربة تسوق لا مثيل لها.
-    </p>
-</div>
+    <main>
+        <!-- Product Images -->
+        <section class="product-display">
+            <div class="main-image-container">
+                <img id="main-img" src="https://via.placeholder.com/500x600?text=Product+Image" alt="Product">
+            </div>
+        </section>
 
-<div class="container">
-    <div class="cards" id="productList">
-        <!-- المنتجات تظهر هنا -->
-    </div>
-</div>
+        <!-- Product Details -->
+        <section class="details">
+            <h2 class="product-title">pull homme uni 119</h2>
+            <div class="price-container">
+                <span class="old-price">33 DT</span>
+                <span class="new-price">30 DT</span>
+                <span class="promo-tag">PROMO 🔥</span>
+            </div>
 
-<!-- أزرار التحكم الخاصة بك (تظهر عند كتابة كلمة السر) -->
-<button class="fixed-add-btn" id="adminAddBtn" onclick="openModal()">
-    <span>➕ إضافة منتج جديد</span>
-</button>
-
-<div class="modal" id="modal">
-    <div class="modal-box">
-        <h3>نشر منتج جديد</h3>
-        <input id="title" placeholder="اسم المنتج">
-        <textarea id="desc" placeholder="وصف المنتج (التفاصيل، الحالة...)"></textarea>
-        <input type="number" id="price" placeholder="السعر (د.ت)">
-        <input type="file" id="imgFile" accept="image/*">
-        <button onclick="uploadProduct()" style="width: 100%; padding: 15px; background: var(--accent-blue); border: none; border-radius: 6px; font-weight: bold; cursor: pointer; margin-top: 10px;">حفظ ونشر</button>
-        <button onclick="closeModal()" style="width: 100%; background: none; color: white; border: none; margin-top: 10px; cursor: pointer;">إغلاق</button>
-    </div>
-</div>
-
-<script>
-// ⚠️ لكي يعمل الموقع للجميع، استبدل هذه القيم ببيانات مشروعك في Firebase:
-const firebaseConfig = {
-  apiKey: "AIzaSy...",
-  authDomain: "your-project.firebaseapp.com",
-  projectId: "your-project-id",
-  storageBucket: "your-project.appspot.com",
-  messagingSenderId: "...",
-  appId: "..."
-};
-
-firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
-
-// 1. عرض السلع للزوار
-function loadProducts() {
-    db.collection("bil_one_store").orderBy("createdAt", "desc").onSnapshot(snap => {
-        const list = document.getElementById("productList");
-        list.innerHTML = "";
-        snap.forEach(doc => {
-            const p = doc.data();
-            list.innerHTML += `
-                <div class="card">
-                    <img src="${p.img}">
-                    <div class="card-content">
-                        <h3>${p.title}</h3>
-                        <p style="color:#94a3b8; font-size:14px; line-height:1.5">${p.desc}</p>
-                        <div class="price">${p.price} د.ت</div>
-                        <a href="https://wa.me/21694622377?text=مرحباً Bil-One-Al، أريد الاستفسار عن: ${p.title}" target="_blank" class="ws-btn">
-                            اطلب عبر واتساب ✅
-                        </a>
-                        <button class="del-btn" onclick="deleteProduct('${doc.id}')">حذف المنتج 🗑️</button>
+            <!-- Color Selection -->
+            <div class="selection-card">
+                <h4 class="selection-title">🎨 اختر اللون / CHOISIR LA COULEUR :</h4>
+                <div class="color-options" id="color-list">
+                    <div class="color-item active" onclick="selectColor('أبيض (Blanc)', 'https://via.placeholder.com/500x600?text=White+Shirt', this)">
+                        <span>Blanc</span>
+                    </div>
+                    <div class="color-item" onclick="selectColor('أسود (Noir)', 'https://via.placeholder.com/500x600?text=Black+Shirt', this)">
+                        <span>Noir</span>
+                    </div>
+                    <div class="color-item" onclick="selectColor('أزرق (Bleu)', 'https://via.placeholder.com/500x600?text=Blue+Shirt', this)">
+                        <span>Bleu</span>
                     </div>
                 </div>
-            `;
-        });
-    });
-}
+            </div>
 
-// 2. إضافة منتج جديد
-async function uploadProduct() {
-    const title = document.getElementById("title").value;
-    const desc = document.getElementById("desc").value;
-    const price = document.getElementById("price").value;
-    const file = document.getElementById("imgFile").files[0];
+            <!-- Size Selection -->
+            <div class="selection-card">
+                <h4 class="selection-title">📏 اختر المقاس / CHOISIR LA TAILLE :</h4>
+                <div class="size-options">
+                    <div class="size-item" onclick="selectSize('M', this)">M</div>
+                    <div class="size-item active" onclick="selectSize('L', this)">L</div>
+                    <div class="size-item" onclick="selectSize('XL', this)">XL</div>
+                    <div class="size-item" onclick="selectSize('XXL', this)">XXL</div>
+                </div>
+            </div>
 
-    if(!title || !price || !file) return alert("يرجى ملء كافة الخانات!");
+            <!-- Trust Section (مثل الصورة تماماً) -->
+            <div class="trust-box">
+                <div class="check-before-pay">
+                    <span>📍 تجم تحل الكولي قبل ما تخلص</span>
+                    <p>Ouvrez le colis avant de payer ✓</p>
+                </div>
+                <div class="features">
+                    <div class="feature-item">🚚 توصيل سريع <br> 24-48h</div>
+                    <div class="feature-item">💵 الدفع عند الاستلام <br> COD</div>
+                    <div class="feature-item">⭐ جودة مضمونة <br> 100%</div>
+                </div>
+            </div>
 
-    const reader = new FileReader();
-    reader.onload = async function(e) {
-        await db.collection("bil_one_store").add({
-            title, desc, price, img: e.target.result, createdAt: new Date()
-        });
-        alert("تم نشر المنتج بنجاح!");
-        closeModal();
-    };
-    reader.readAsDataURL(file);
-}
+            <!-- Order Form -->
+            <div class="order-form">
+                <h3 class="form-header">📋 أكمل طلبك</h3>
+                <input type="text" id="cust-name" placeholder="* الاسم الكامل" required>
+                <input type="tel" id="cust-phone" placeholder="* رقم الهاتف" required>
+                <select id="cust-state">
+                    <option value="">-- اختر الولاية --</option>
+                    <option value="Tunis">تونس</option>
+                    <option value="Sousse">سوسة</option>
+                    <option value="Sfax">صفاقس</option>
+                    <option value="Nabeul">نابل</option>
+                    <option value="Bizerte">بنزرت</option>
+                    <!-- يمكنك إضافة باقي الولايات -->
+                </select>
+                <textarea id="cust-address" placeholder="* العنوان الكامل"></textarea>
 
-// 3. نظام الدخول السري (كلمة السر 07471392)
-let clicks = 0;
-document.getElementById("logoSecret").onclick = function() {
-    clicks++;
-    if(clicks === 3) {
-        const pass = prompt("أدخل كلمة مرور الإدارة:");
-        if(pass === "07471392") { 
-            document.body.classList.add("admin-mode");
-            alert("تم تفعيل وضع الإدارة.");
-        } else {
-            alert("كلمة مرور خاطئة!");
-        }
-        clicks = 0;
-    }
-};
+                <div class="invoice">
+                    <div class="inv-row"><span>المنتج:</span> <span>30 DT</span></div>
+                    <div class="inv-row"><span>التوصيل:</span> <span>8 DT</span></div>
+                    <div class="inv-row total"><span>المجموع الكلي:</span> <span>38 DT</span></div>
+                </div>
 
-// 4. حذف المنتج
-async function deleteProduct(id) {
-    if(confirm("هل أنت متأكد من حذف هذا المنتج نهائياً؟")) {
-        await db.collection("bil_one_store").doc(id).delete();
-    }
-}
+                <button class="buy-now-btn" onclick="checkout()">
+                    <span>اشتري الآن</span>
+                    <small>ORDER NOW 📞</small>
+                </button>
+            </div>
+        </section>
+    </main>
 
-function openModal() { document.getElementById("modal").style.display = "flex"; }
-function closeModal() { document.getElementById("modal").style.display = "none"; }
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/21694622377" class="wa-float" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+    </a>
 
-loadProducts();
-</script>
-
+    <script src="script.js"></script>
 </body>
 </html>
